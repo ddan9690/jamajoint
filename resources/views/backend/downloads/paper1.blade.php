@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Paper 1 Analysis
+    </title>
+    <style>
+        /* Include styles from the first template for consistent design */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 150px;
+            margin: 0 auto 10px;
+            display: block;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            /* Set the font size */
+        }
+
+        .table,
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 4px;
+            /* Set the padding */
+            text-align: left;
+        }
+
+        th,
+        td {
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .overall-row {
+            background-color: #c9c9c9;
+            font-weight: bold;
+        }
+
+        .text-info {
+            color: blue;
+        }
+
+        .text-decoration-underline {
+            text-decoration: underline;
+        }
+
+        .exam-details {
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            /* Set the font size */
+        }
+
+        .subheading-paper-1 {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h5 class="exam-details">
+            {{ $exam->name }} Form {{ $exam->form->name }} Term {{ $exam->term }} {{ $exam->year }}
+        </h5>
+
+        <h4 class="subheading-paper-1">
+            <strong>**PAPER 1**</strong>
+        </h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ADM</th>
+                    <th>NAME</th>
+                    <th>STRM</th>
+                    <th>PP1</th>
+                    <th>GRD</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($results as $result)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $result['student']->adm }}</td>
+                        <td>{{ $result['student']->name }}</td>
+                        <td>{{ $result['student']->stream->name }}</td>
+                        <td>{{ $result['paper1Marks'] }}</td>
+                        <td>{{ $result['grade'] }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <h5 class="text-info text-decoration-underline">Grade Analysis</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Stream</th>
+                    @foreach ($gradingSystem as $grade)
+                        <th>{{ $grade->grade }}</th>
+                    @endforeach
+                    <th>Total</th>
+                    <th>Mean</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $sortedAnalysis = collect($analysis)->sortByDesc('mean');
+                    $overallTotal = 0;
+                    $overallMean = 0;
+                @endphp
+
+                @foreach ($sortedAnalysis as $item)
+                    <tr>
+                        <td>{{ $item['stream'] }}</td>
+                        @foreach ($gradingSystem as $grade)
+                            <td>{{ $item['grades'][$grade->grade] }}</td>
+                        @endforeach
+                        <td>{{ $item['total'] }}</td>
+                        <td>{{ $item['mean'] }}</td>
+                    </tr>
+                @endforeach
+
+                <tr class="overall-row">
+                    <td>Overall</td>
+                    @foreach ($gradingSystem as $grade)
+                        <td>
+                            @php
+                                $gradeCount = 0;
+                                foreach ($sortedAnalysis as $item) {
+                                    $gradeCount += $item['grades'][$grade->grade];
+                                }
+                                echo $gradeCount;
+                                $overallTotal += $gradeCount;
+                                $gradePoints = $gradingSystem->where('grade', $grade->grade)->first()->points ?? 0;
+                                $overallMean += $gradeCount * $gradePoints;
+                            @endphp
+                        </td>
+                    @endforeach
+                    <td>{{ $overallTotal }}</td>
+                    <td>{{ $overallTotal > 0 ? round($overallMean / $overallTotal, 4) : 0 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

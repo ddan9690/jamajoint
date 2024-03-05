@@ -61,8 +61,8 @@
                                 <div class="login-form">
                                     <div class="text-center">
                                         <a href="/" class="navbar-brand">
-                                            <img src="{{ asset('backend/img/logo/cyberspace-national-joint-logo.png') }}"
-                                                alt="Cyberspace Logo" width="100px">
+                                            <img src="{{ asset('frontend/img/jamajoint-logo.png') }}"
+                                                alt="Cyberspace Logo" width="150px">
                                         </a>
                                         <h1 class="h4 text-gray-900 mb-4">Register</h1>
 

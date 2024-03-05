@@ -6,10 +6,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                &copy; <script>document.write(new Date().getFullYear());</script> <a href="/">CyberSpace</a>, All Rights Reserved.
+                &copy; <script>document.write(new Date().getFullYear());</script> <a href="/">JamaJoint</a>, All Rights Reserved.
             </div>
             <div class="col-md-6 text-center text-md-end">
-                <span class="phone">Phone: +254729804932</span>
+                <span class="phone">Phone: 0711317235</span>
             </div>
         </div>
     </div>

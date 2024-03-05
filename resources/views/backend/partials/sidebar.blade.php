@@ -1,7 +1,8 @@
 <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-icon">
-            <img src="{{ asset('backend/img/logo/cyberspace-national-joint-logo.png') }}">
+            <img src="{{ asset('frontend/img/jamajoint-logo.png') }}"
+            alt="JamaJoint Logo">
         </div>
         <div class="sidebar-brand-text mx-3">Home</div>
     </a>

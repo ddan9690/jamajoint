@@ -26,7 +26,7 @@ use App\Http\Controllers\PaperAnalysisController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/hocha', function () {

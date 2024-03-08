@@ -98,7 +98,7 @@
 
 
         <div style="text-align: center; font-weight: bold;">
-            www.cyberspace.co.ke
+            www.jamajoint.co.ke
         </div>
     </div>
 </body>

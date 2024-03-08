@@ -19,7 +19,7 @@
         <link rel="manifest" href="{{ asset('backend/img/logo/site.webmanifest') }}">
         <link rel="mask-icon" href="{{ asset('backend/img/logo/safari-pinned-tab.svg') }}" color="#5bbad5">
 
-  <title>@yield('title', 'CyberSpace National Joint')</title>
+  <title>@yield('title', 'JamaJoint')</title>
   <link href="{{ asset('backend/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">

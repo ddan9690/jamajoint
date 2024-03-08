@@ -20,7 +20,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
-    <title>CyberSpace History National Joint - Email Verification</title>
+    <title>JamJoint- Verify Email</title>
     <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text css">
     <link href="{{ asset('backend/css/ruang-admin.min.css') }}" rel="stylesheet">
@@ -55,15 +55,15 @@
                                     <div class="text-center">
                                         <div class="text-center">
                                             <a href="/" class="navbar-brand">
-                                                <img src="{{ asset('backend/img/logo/cyberspace-national-joint-logo.png') }}"
-                                                    alt="Cyberspace Logo" width="100px">
+                                                <img src="{{ asset('frontend/img/jamajoint-logo.png') }}"
+                                                alt="Cyberspace Logo" width="150px">
                                             </a>
                                             <h1 class="h4 text-gray-900 mb-4">Email Verification</h1>
                                         </div>
                                     </div>
 
                                     <div class="mb-4 text-sm text-gray-600">
-                                        {{ __('Thanks for joining CyberSpace. Please verify your email address by clicking on the link we just emailed to you. If you didn\'t receive the email, we will gladly send you another.') }}
+                                        {{ __('Thanks for joining JamaJoint. Please verify your email address by clicking on the link we just emailed to you. If you didn\'t receive the email, we will gladly send you another.') }}
                                     </div>
 
                                     <div class="mt-4 flex items-center justify-between">

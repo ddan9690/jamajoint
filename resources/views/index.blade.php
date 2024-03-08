@@ -281,8 +281,8 @@
                         <img class="img-fluid rounded w-100" src="{{ asset('frontend/img/dancan.jpg') }}" alt="">
                     </div>
                     <div class="px-4 py-3">
-                        <h5 class="fw-bold m-0">Jhon Doe</h5>
-                        <small>CEO</small>
+                        <h5 class="fw-bold m-0">Dancan Okeyo</h5>
+                        <small>Founder</small>
                     </div>
                 </div>
             </div>
@@ -295,11 +295,11 @@
                             <a class="btn btn-square text-primary bg-white my-1" href=""><i class="fab fa-instagram"></i></a>
                             <a class="btn btn-square text-primary bg-white my-1" href=""><i class="fab fa-linkedin-in"></i></a>
                         </div>
-                        <img class="img-fluid rounded w-100" src="{{ asset('frontend/img/team-2.jpg') }}" alt="">
+                        <img class="img-fluid rounded w-100" src="{{ asset('frontend/img/emmanuel-mwita.jfif') }}" alt="">
                     </div>
                     <div class="px-4 py-3">
-                        <h5 class="fw-bold m-0">Emma William</h5>
-                        <small>Manager</small>
+                        <h5 class="fw-bold m-0">Emmanuel Mwita</h5>
+                        <small>CEO Rango Technologies</small>
                     </div>
                 </div>
             </div>

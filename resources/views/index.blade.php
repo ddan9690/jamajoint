@@ -9,22 +9,22 @@
         <div class="row g-5">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="section-title position-relative mb-4 pb-2">
-                    <h6 class="position-relative text-primary ps-4">About Us</h6>
-                    <h2 class="mt-2">The best SEO solution with 10 years of experience</h2>
+                    <h6 class="position-relative text-primary ps-4">About JamaJoint</h6>
+                    <h2 class="mt-2">Revolutionizing Joint Exam Analysis for High School Teachers</h2>
                 </div>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna dolore erat amet</p>
+                <p class="mb-4">JamaJoint is your comprehensive solution for joint exam analysis, designed to empower high school teachers. Say goodbye to manual processes and Excel headaches. Our platform ensures meticulous examination analysis, providing accurate insights into school, stream, and student performances.</p>
                 <div class="row g-3">
                     <div class="col-sm-6">
-                        <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Award Winning</h6>
-                        <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Professional Staff</h6>
+                        <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Meticulous Analysis</h6>
+                        <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Effortless Data Entry</h6>
                     </div>
                     <div class="col-sm-6">
-                        <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>24/7 Support</h6>
-                        <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>Fair Prices</h6>
+                        <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Comprehensive Reports</h6>
+                        <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>User-Friendly Interface</h6>
                     </div>
                 </div>
                 <div class="d-flex align-items-center mt-4">
-                    <a class="btn btn-primary rounded-pill px-4 me-3" href="">Read More</a>
+                    <a class="btn btn-primary rounded-pill px-4 me-3" href="">Learn More</a>
                     <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-instagram"></i></a>
@@ -32,34 +32,34 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="{{ asset('frontend/img/about.jpg') }}">
+                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="{{ asset('path/to/jamajoint-about-image.jpg') }}">
             </div>
-
         </div>
     </div>
 </div>
+
 <!-- About End -->
 
 
 <!-- Newsletter Start -->
 <div class="container-xxl bg-primary newsletter my-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container px-lg-5">
-        <div class="row align-items-center" style="height: 250px;">
+        <div class="row align-items-center" style="min-height: 250px;">
             <div class="col-12 col-md-6">
-                <h3 class="text-white">Ready to get started</h3>
-                <small class="text-white">Diam elitr est dolore at sanctus nonumy.</small>
+                <h3 class="text-white">Stay Informed with JamaJoint</h3>
+                <small class="text-white">Get the latest updates and insights on joint exam analysis.</small>
                 <div class="position-relative w-100 mt-3">
-                    <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text" placeholder="Enter Your Email" style="height: 48px;">
+                    <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="email" placeholder="Enter Your Email" style="height: 48px;" required>
                     <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
                 </div>
             </div>
             <div class="col-md-6 text-center mb-n5 d-none d-md-block">
-                <img class="img-fluid mt-5" style="height: 250px;" src="{{ asset('frontend/img/newsletter.png') }}">
+                <img class="img-fluid mt-5" style="height: 250px;" src="{{ asset('path/to/jamajoint-newsletter-image.png') }}" alt="JamaJoint Newsletter">
             </div>
-
         </div>
     </div>
 </div>
+
 <!-- Newsletter End -->
 
 
@@ -68,72 +68,43 @@
     <div class="container px-lg-5">
         <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="position-relative d-inline text-primary ps-4">Our Services</h6>
-            <h2 class="mt-2">What Solutions We Provide</h2>
+            <h2 class="mt-2">Empowering Education with JamaJoint</h2>
         </div>
         <div class="row g-4">
             <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                 <div class="service-item d-flex flex-column justify-content-center text-center rounded">
                     <div class="service-icon flex-shrink-0">
-                        <i class="fa fa-home fa-2x"></i>
+                        <i class="fa fa-search fa-2x"></i>
                     </div>
-                    <h5 class="mb-3">SEO Optimization</h5>
-                    <p>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
+                    <h5 class="mb-3">Joint Exam Analysis</h5>
+                    <p>Revolutionize the way you analyze joint exams. Meticulous examination analysis, eliminating errors and providing comprehensive reports.</p>
+                    <a class="btn px-3 mt-auto mx-auto" href="#">Learn More</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
                 <div class="service-item d-flex flex-column justify-content-center text-center rounded">
                     <div class="service-icon flex-shrink-0">
-                        <i class="fa fa-home fa-2x"></i>
+                        <i class="fa fa-chart-bar fa-2x"></i>
                     </div>
-                    <h5 class="mb-3">Web Design</h5>
-                    <p>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
+                    <h5 class="mb-3">Performance Insights</h5>
+                    <p>Unlock valuable insights into school ranking, stream analysis, overall student ranking, and paper-wise analysis.</p>
+                    <a class="btn px-3 mt-auto mx-auto" href="#">Discover More</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
                 <div class="service-item d-flex flex-column justify-content-center text-center rounded">
                     <div class="service-icon flex-shrink-0">
-                        <i class="fa fa-home fa-2x"></i>
+                        <i class="fa fa-cogs fa-2x"></i>
                     </div>
-                    <h5 class="mb-3">Social Media Marketing</h5>
-                    <p>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
-                <div class="service-item d-flex flex-column justify-content-center text-center rounded">
-                    <div class="service-icon flex-shrink-0">
-                        <i class="fa fa-home fa-2x"></i>
-                    </div>
-                    <h5 class="mb-3">Email Marketing</h5>
-                    <p>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
-                <div class="service-item d-flex flex-column justify-content-center text-center rounded">
-                    <div class="service-icon flex-shrink-0">
-                        <i class="fa fa-home fa-2x"></i>
-                    </div>
-                    <h5 class="mb-3">PPC Advertising</h5>
-                    <p>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
-                <div class="service-item d-flex flex-column justify-content-center text-center rounded">
-                    <div class="service-icon flex-shrink-0">
-                        <i class="fa fa-home fa-2x"></i>
-                    </div>
-                    <h5 class="mb-3">App Development</h5>
-                    <p>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
+                    <h5 class="mb-3">User-Friendly Platform</h5>
+                    <p>Simplify your joint analysis with JamaJoint. Just create exams, input marks, and publish effortlessly.</p>
+                    <a class="btn px-3 mt-auto mx-auto" href="#">Get Started</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Service End -->
 
 
@@ -240,51 +211,52 @@
         <div class="owl-carousel testimonial-carousel">
             <div class="testimonial-item bg-transparent border rounded text-white p-4">
                 <i class="fa fa-quote-left fa-2x mb-3"></i>
-                <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                <p>JamaJoint has truly transformed the way we handle joint exam analysis. The platform's accuracy and user-friendly interface have made the process seamless. It has become an essential tool for our school's success.</p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/testimonial-1.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
                     <div class="ps-3">
-                        <h6 class="text-white mb-1">Client Name</h6>
-                        <small>Profession</small>
+                        <h6 class="text-white mb-1">John Doe</h6>
+                        <small>High School Teacher</small>
                     </div>
                 </div>
             </div>
             <div class="testimonial-item bg-transparent border rounded text-white p-4">
                 <i class="fa fa-quote-left fa-2x mb-3"></i>
-                <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                <p>Using JamaJoint has been a game-changer for us. The detailed analysis reports and insights provided have helped us identify areas of improvement and celebrate our successes. It's a must-have tool for any high school teacher.</p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/testimonial-2.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
                     <div class="ps-3">
-                        <h6 class="text-white mb-1">Client Name</h6>
-                        <small>Profession</small>
+                        <h6 class="text-white mb-1">Jane Smith</h6>
+                        <small>Subject Coordinator</small>
                     </div>
                 </div>
             </div>
             <div class="testimonial-item bg-transparent border rounded text-white p-4">
                 <i class="fa fa-quote-left fa-2x mb-3"></i>
-                <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                <p>We have been using JamaJoint for several years now, and it has become an integral part of our examination process. The platform's reliability and the ability to generate comprehensive reports make it an invaluable asset for our educational institution.</p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/testimonial-3.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
                     <div class="ps-3">
-                        <h6 class="text-white mb-1">Client Name</h6>
-                        <small>Profession</small>
+                        <h6 class="text-white mb-1">Robert Johnson</h6>
+                        <small>School Administrator</small>
                     </div>
                 </div>
             </div>
             <div class="testimonial-item bg-transparent border rounded text-white p-4">
                 <i class="fa fa-quote-left fa-2x mb-3"></i>
-                <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                <p>JamaJoint has simplified our examination analysis process, allowing us to focus more on enhancing our teaching methods. The user-friendly platform and insightful reports have positively impacted our school's overall academic performance.</p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/testimonial-4.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
                     <div class="ps-3">
-                        <h6 class="text-white mb-1">Client Name</h6>
-                        <small>Profession</small>
+                        <h6 class="text-white mb-1">Maria Rodriguez</h6>
+                        <small>Mathematics Teacher</small>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Testimonial End -->
 

@@ -4,6 +4,7 @@
         <a href="" class="navbar-brand p-0">
             <h1 class="m-0"><i class="fa fa-graduation-cap me-2"></i>Jama<span>Joint</span></h1>
             <!-- <img src="img/logo.png" alt="Logo"> -->
+
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
@@ -27,7 +28,7 @@
                 <div class="col-lg-6 text-center text-lg-start">
                     <h1 class="text-white mb-4 animated zoomIn">Revolutionizing Joint Exam Analysis for High School Teachers</h1>
                     <p class="text-white pb-3 animated zoomIn">Empower your teaching with JamaJoint - the all-in-one solution for meticulous examination analysis. Say goodbye to manual processes and Excel headaches.</p>
-                    <a href="#" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Get Started</a>
+                    <a href="{{route('dashboard')}}" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Get Started</a>
                     <a href="#" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
                 </div>
                 <div class="col-lg-6 text-center text-lg-start">

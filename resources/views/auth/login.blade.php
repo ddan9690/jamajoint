@@ -5,11 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta content="history,login, government, education, teachers, students, KCSE preparation, joint, form 3,analysis, hocha"
-        name="keywords">
-    <meta content="CyberSpace offers a platform for teachers to assess their History and Government students, providing
-        valuable insights and performance comparisons with other schools. Our comprehensive examination analysis helps
-        prepare candidates for their upcoming KCSE exams." name="description">
+    <meta name="keywords" content="JamaJoint, Exam Analysis, High School, Secondary School, Teachers, Departmental Examinations, Joint Examinations, CATs, RATs, Meticulous Analysis">
+    <meta name="description" content="JamaJoint - Your platform for comprehensive and quick exam analysis tailored for teachers. Effortlessly analyze student results for joint and internal departmental examinations, CATs, and RATs. Empower teachers with insightful performance analytics, efficient analysis tools, and streamlined processes. Say goodbye to manual tasks and embrace the simplicity of education analysis with JamaJoint.">
+
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/favicon/favicon-16x16.png') }}">

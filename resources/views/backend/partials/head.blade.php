@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta content="CyberSpace offers a platform for teachers to assess their History and Government students, providing valuable insights and performance comparisons with other schools. Our comprehensive examination analysis helps prepare candidates for their upcoming KCSE exams." name="description">
+    <meta name="keywords" content="JamaJoint, Exam Analysis, High School, Secondary School, Teachers, Departmental Examinations, Joint Examinations, CATs, RATs, Meticulous Analysis">
+    <meta name="description" content="JamaJoint - Your platform for comprehensive and quick exam analysis tailored for teachers. Effortlessly analyze student results for joint and internal departmental examinations, CATs, and RATs. Empower teachers with insightful performance analytics, efficient analysis tools, and streamlined processes. Say goodbye to manual tasks and embrace the simplicity of education analysis with JamaJoint.">
 
-    <meta content="history, government, education, teachers, students, KCSE preparation, joint, form 3,analysis, hocha" name="keywords">
+    <<!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/favicon/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/favicon/favicon-32x32.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend/img/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('frontend/img/favicon/android-chrome-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('frontend/img/favicon/android-chrome-512x512.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/img/favicon/favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('frontend/img/favicon/site.webmanifest') }}">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('backend/img/logo/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('backend/img/logo/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/img/logo/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ asset('backend/img/logo/site.webmanifest') }}">
-    <link rel="mask-icon" href="{{ asset('backend/img/logo/safari-pinned-tab.svg') }}" color="#5bbad5">
-
-    <title>@yield('title', 'JamaJoint')</title>
+    <title>@yield('title', 'JamaJoint:: Analysis Portal')</title>
     <link href="{{ asset('backend/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">

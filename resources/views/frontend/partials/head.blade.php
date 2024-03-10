@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <title>JamaJoint - Revolutionizing High School Exam Analysis: Joint Exams, CATs, and RATs Simplified</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="JamaJoint - Empowering High School Teachers to Analyze and View Comprehensive Reports for Joint Exams, Internal Assessments, CATs, and RATs in History, Geography, Mathematics, CRE, Computer Studies, Business Studies, and Islamic Education. Revolutionize your grading process, gain instant insights, and elevate your exam analysis experience." name="description">
+    <meta name="keywords" content="JamaJoint, Exam Analysis, Teachers, Departmental Examinations, Joint Examinations, CATs, RATs, Meticulous Analysis">
+    <meta name="description" content="JamaJoint - Your platform for comprehensive and quick exam analysis tailored for teachers. Effortlessly analyze student results for joint and internal departmental examinations, CATs, and RATs. Empower teachers with insightful performance analytics, efficient analysis tools, and streamlined processes. Say goodbye to manual tasks and embrace the simplicity of education analysis with JamaJoint.">
+
 
      <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/favicon/favicon-16x16.png') }}">

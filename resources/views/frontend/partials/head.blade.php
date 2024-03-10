@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>JamaJoint - Revolutionizing Joint Exam Analysis</title>
+    <title>JamaJoint - Revolutionizing High School Exam Analysis: Joint Exams, CATs, and RATs Simplified</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="JamaJoint - Revolutionizing Joint Exam Analysis for High School Teachers" name="description">
+    <meta content="JamaJoint - Empowering High School Teachers to Analyze and View Comprehensive Reports for Joint Exams, Internal Assessments, CATs, and RATs in History, Geography, Mathematics, CRE, Computer Studies, Business Studies, and Islamic Education. Revolutionize your grading process, gain instant insights, and elevate your exam analysis experience." name="description">
+
 
     <!-- Favicon -->
     <link href="{{ asset('path/to/jamajoint-favicon.ico') }}" rel="icon">

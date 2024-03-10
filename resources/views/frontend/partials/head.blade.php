@@ -30,6 +30,13 @@
     <!-- JamaJoint Stylesheet -->
     <link href="{{ asset('path/to/jamajoint-style.css') }}" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K2C0JLQK0D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-K2C0JLQK0D');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>

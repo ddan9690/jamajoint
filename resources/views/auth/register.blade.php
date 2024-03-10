@@ -13,8 +13,6 @@
         content="CyberSpace offers a platform for teachers to assess their History and Government students, providing valuable insights and performance comparisons with other schools. Our comprehensive examination analysis helps prepare candidates for their upcoming KCSE exams."
         name="description">
 
-
-
     <meta name="msapplication-TileColor" content="#ffffff">
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('backend/img/logo/apple-touch-icon.png') }}">
@@ -31,8 +29,8 @@
     <link href="{{ asset('backend/css/ruang-admin.min.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
 
-    <!-- Google Analytics Tag -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1J9G6J28CV"></script>
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K2C0JLQK0D"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -40,13 +38,14 @@
             dataLayer.push(arguments);
         }
         gtag('js', new Date());
-        gtag('config', 'G-1J9G6J28CV');
+        gtag('config', 'G-K2C0JLQK0D');
     </script>
-    <!-- End Google Analytics Tag -->
+    <!-- End Google Tag Manager -->
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9496284073317725"
         crossorigin="anonymous"></script>
 </head>
+
 
 
 <body class="bg-gradient-login">

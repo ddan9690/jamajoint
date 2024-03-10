@@ -10,7 +10,7 @@
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="section-title position-relative mb-4 pb-2">
                     <h6 class="position-relative text-primary ps-4">About JamaJoint</h6>
-                    <h2 class="mt-2">Streamline Your Joint, CATs and RATs analysis Insights Effortlessly</h2>
+                    <h2 class="mt-2">Streamline Your Joint, CATs and RATs Analysis Insights Effortlessly</h2>
                 </div>
                 <p class="mb-4">Welcome to JamaJoint, where exam analysis meets simplicity. Say goodbye to the complexities of manual processes and Excel headaches. Our platform ensures meticulous examination analysis, providing insightful reports on school, stream, and student performances.</p>
                 <div class="row g-3">
@@ -23,13 +23,6 @@
                         <h6 class="mb-0"><i class="fa fa-check text-primary me-2"></i>User-Friendly Interface</h6>
                     </div>
                 </div>
-                <div class="d-flex align-items-center mt-4">
-                    <a class="btn btn-primary rounded-pill px-4 me-3" href="#">Explore More</a>
-                    <a class="btn btn-outline-primary btn-square me-3" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-primary btn-square me-3" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-primary btn-square me-3" href="#"><i class="fab fa-instagram"></i></a>
-                    <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
             </div>
             <div class="col-lg-6">
                 <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="{{ asset('frontend/img/about.jpg') }}" alt="JamaJoint About Image">
@@ -37,6 +30,7 @@
         </div>
     </div>
 </div>
+
 
 
 

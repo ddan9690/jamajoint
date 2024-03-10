@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="col-md-6 text-center mb-n5 d-none d-md-block">
-                <img class="img-fluid mt-5" style="height: 250px;" src="{{ asset('path/to/jamajoint-newsletter-image.png') }}" alt="JamaJoint Newsletter">
+                <img class="img-fluid mt-5" style="height: 250px;" src="{{ asset('frontend/img/newsletter.png') }}" alt="JamaJoint Newsletter">
             </div>
         </div>
     </div>

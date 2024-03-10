@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="{{ asset('path/to/jamajoint-about-image.jpg') }}" alt="JamaJoint About Image">
+                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="{{ asset('frontend/img/about.jpg') }}" alt="JamaJoint About Image">
             </div>
         </div>
     </div>

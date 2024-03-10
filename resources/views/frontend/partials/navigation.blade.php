@@ -2,9 +2,10 @@
 <div class="container-xxl position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
         <a href="" class="navbar-brand p-0">
-            <h1 class="m-0"><i class="fa fa-graduation-cap me-2"></i>Jama<span>Joint</span></h1>
-            <!-- <img src="img/logo.png" alt="Logo"> -->
-
+            <h1 class="m-0">
+                <img src="{{ asset('frontend/img/jamajoint-logo.png') }}" alt="Jamajoint Logo" class="logo-img me-2">
+                Jama<span>Joint</span>
+            </h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
@@ -17,15 +18,17 @@
                 <a href="#" class="nav-item nav-link">Analysis</a>
                 <a href="#" class="nav-item nav-link">Contact</a>
             </div>
-            <button type="button" class="btn text-secondary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+            <button type="button" class="btn text-secondary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal">
+                <i class="fa fa-search"></i>
+            </button>
             @auth
                 <a href="{{ route('dashboard') }}" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Dashboard</a>
             @else
-            <a href="{{ route('login') }}" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Login</a>
-
+                <a href="{{ route('login') }}" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Login</a>
             @endauth
         </div>
     </nav>
+
 
     <div class="container-xxl py-5 bg-primary hero-header mb-5">
         <div class="container my-5 py-5 px-lg-5">

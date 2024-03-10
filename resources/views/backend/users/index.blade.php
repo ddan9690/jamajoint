@@ -1,5 +1,5 @@
 @extends('backend.layout.master')
-@section('title', 'User Index')
+@section('title', 'Users')
 @section('content')
 
 <div class="col-lg-12">

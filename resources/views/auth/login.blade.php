@@ -21,7 +21,8 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
-    <title>CyberSpace History National Joint - Login</title>
+    <title>JamaJoint - Revolutionizing High School Exam Analysis: Joint Exams, CATs, and RATs Simplified</title>
+
     <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/css/ruang-admin.min.css') }}" rel="stylesheet">

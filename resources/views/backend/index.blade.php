@@ -1,5 +1,5 @@
 @extends('backend.layout.master')
-@section('title', 'Cyberspace National Joint : : Dashboard')
+@section('title', 'JamaJoint : : Dashboard')
 @section('content')
 <div class="container">
     @if (count($exams) > 0)

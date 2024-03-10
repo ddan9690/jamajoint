@@ -18,7 +18,12 @@
                 <a href="#" class="nav-item nav-link">Contact</a>
             </div>
             <button type="button" class="btn text-secondary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
-            <a href="#" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Free Demo</a>
+            @auth
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Dashboard</a>
+            @else
+            <a href="{{ route('login') }}" class="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">Login</a>
+
+            @endauth
         </div>
     </nav>
 
@@ -26,9 +31,9 @@
         <div class="container my-5 py-5 px-lg-5">
             <div class="row g-5 py-5">
                 <div class="col-lg-6 text-center text-lg-start">
-                    <h1 class="text-white mb-4 animated zoomIn">Revolutionizing Joint Exam Analysis for High School Teachers</h1>
-                    <p class="text-white pb-3 animated zoomIn">Empower your teaching with JamaJoint - the all-in-one solution for meticulous examination analysis. Say goodbye to manual processes and Excel headaches.</p>
-                    <a href="{{route('dashboard')}}" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Get Started</a>
+                    <h1 class="text-white mb-4 animated zoomIn">Simplify Joint Exam Analysis with JamaJoint</h1>
+                    <p class="text-white pb-3 animated zoomIn">Make your work quick and simple. JamaJoint lets you analyze joint exams, CATs, and RATs with ease. No more tedious Excel tasks!</p>
+                    <a href="{{ route('dashboard') }}" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Get Started</a>
                     <a href="#" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
                 </div>
                 <div class="col-lg-6 text-center text-lg-start">

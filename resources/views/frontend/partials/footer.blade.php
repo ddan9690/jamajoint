@@ -2,7 +2,7 @@
  <div class="container-fluid bg-primary text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5 px-lg-5">
         <div class="row g-5">
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-6 col-lg-3 mx-auto text-center">
                 <h5 class="text-white mb-4">Get In Touch</h5>
                 <p><i class="fa fa-phone-alt me-3"></i>+0711317235</p>
                 <p><i class="fa fa-envelope me-3"></i>ddan9690@gmail.com</p>
@@ -22,7 +22,7 @@
                 <a class="btn btn-link" href="">Terms & Condition</a>
                 <a class="btn btn-link" href="">Career</a>
             </div> --}}
-            <div class="col-md-6 col-lg-3">
+            {{-- <div class="col-md-6 col-lg-3">
                 <h5 class="text-white mb-4">Project Gallery</h5>
                 <div class="row g-2">
                     <div class="col-4">
@@ -53,7 +53,7 @@
                     <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text" placeholder="Your Email" style="height: 48px;">
                     <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i> Subscribe</button>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

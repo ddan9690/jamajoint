@@ -43,15 +43,14 @@
 
 
 <!-- Newsletter Start -->
-<div class="container-xxl bg-primary newsletter my-5 wow fadeInUp" data-wow-delay="0.1s">
+<div class="container-xxl bg-primary call-to-action my-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container px-lg-5">
         <div class="row align-items-center" style="min-height: 250px;">
             <div class="col-12 col-md-6">
-                <h3 class="text-white">Stay Informed with JamaJoint</h3>
-                <small class="text-white">Get the latest updates and insights on joint exam analysis.</small>
+                <h3 class="text-white">Explore the JamaJoint Exam Area</h3>
+                <small class="text-white">Get comprehensive insights into joint exam analysis. Click the button below to access the exam area.</small>
                 <div class="position-relative w-100 mt-3">
-                    <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="email" placeholder="Enter Your Email" style="height: 48px;" required>
-                    <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
+                    <a href="{{ route('dashboard') }}" class="btn btn-outline-light rounded-pill w-100 ps-4 pe-5" style="height: 48px;">Go to JamaJoint Exam Area</a>
                 </div>
             </div>
             <div class="col-md-6 text-center mb-n5 d-none d-md-block">
@@ -61,6 +60,7 @@
     </div>
 </div>
 
+
 <!-- Newsletter End -->
 
 
@@ -68,8 +68,8 @@
 <div class="container-xxl py-5">
     <div class="container px-lg-5">
         <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
-            <h6 class="position-relative d-inline text-primary ps-4">Our Services</h6>
-            <h2 class="mt-2">Empowering Education with JamaJoint</h2>
+            <h6 class="position-relative d-inline text-primary ps-4">JamaJoint Features</h6>
+            <h2 class="mt-2">Empowering Teachers with Seamless Exam Analysis</h2>
         </div>
         <div class="row g-4">
             <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
@@ -77,8 +77,8 @@
                     <div class="service-icon flex-shrink-0">
                         <i class="fa fa-search fa-2x"></i>
                     </div>
-                    <h5 class="mb-3">Joint Exam Analysis</h5>
-                    <p>Revolutionize the way you analyze joint exams. Meticulous examination analysis, eliminating errors and providing comprehensive reports.</p>
+                    <h5 class="mb-3">Joint Exam Precision</h5>
+                    <p>Revolutionize joint exam analysis with JamaJoint. Experience meticulous examination analysis, eliminating errors, and receiving comprehensive reports instantly.</p>
                     <a class="btn px-3 mt-auto mx-auto" href="#">Learn More</a>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                         <i class="fa fa-chart-bar fa-2x"></i>
                     </div>
                     <h5 class="mb-3">Performance Insights</h5>
-                    <p>Unlock valuable insights into school ranking, stream analysis, overall student ranking, and paper-wise analysis.</p>
+                    <p>Unlock valuable insights into school ranking, stream analysis, overall student ranking, and detailed paper-wise analysis to enhance teaching strategies.</p>
                     <a class="btn px-3 mt-auto mx-auto" href="#">Discover More</a>
                 </div>
             </div>
@@ -98,13 +98,14 @@
                         <i class="fa fa-cogs fa-2x"></i>
                     </div>
                     <h5 class="mb-3">User-Friendly Platform</h5>
-                    <p>Simplify your joint analysis with JamaJoint. Just create exams, input marks, and publish effortlessly.</p>
+                    <p>Simplify your joint exam analysis with JamaJoint. Just create exams, input marks, and publish effortlessly, saving time and reducing complexity.</p>
                     <a class="btn px-3 mt-auto mx-auto" href="#">Get Started</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Service End -->
 

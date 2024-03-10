@@ -29,32 +29,10 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/hocha', function () {
-    return view('frontend.hocha');
-});
 
-Route::get('/profile/thuo-wa-ngugi', function () {
-    return view('frontend.profiles.thuo-wa-ngugi');
-});
 
-Route::get('/profile/felix-john-odiwuor', function () {
-    return view('frontend.profiles.felix-john-odiwuor');
-});
 
-Route::get('/profile/churchil-aroko', function () {
-    return view('frontend.profiles.churchil-aroko');
-});
 
-Route::get('/profile/benard-ombija', function () {
-    return view('frontend.profiles.benard-ombija');
-});
-
-Route::get('/profile/victor-mwoma', function () {
-    return view('frontend.profiles.victor-mwoma');
-});
-
-Route::get('latest-news', [HomeController::class, 'news'])->name('cyberspace.news');
-Route::get('/latest-news/{id}-{slug}', [NewsController::class, 'show'])->name('news.show');
 
 // social  authentication
 Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);

@@ -7,9 +7,16 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="JamaJoint - Empowering High School Teachers to Analyze and View Comprehensive Reports for Joint Exams, Internal Assessments, CATs, and RATs in History, Geography, Mathematics, CRE, Computer Studies, Business Studies, and Islamic Education. Revolutionize your grading process, gain instant insights, and elevate your exam analysis experience." name="description">
 
+     <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/favicon/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/favicon/favicon-32x32.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend/img/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('frontend/img/favicon/android-chrome-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('frontend/img/favicon/android-chrome-512x512.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/img/favicon/favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('frontend/img/favicon/site.webmanifest') }}">
 
-    <!-- Favicon -->
-    <link href="{{ asset('path/to/jamajoint-favicon.ico') }}" rel="icon">
+
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

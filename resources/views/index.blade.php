@@ -10,9 +10,9 @@
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="section-title position-relative mb-4 pb-2">
                     <h6 class="position-relative text-primary ps-4">About JamaJoint</h6>
-                    <h2 class="mt-2">Revolutionizing High School Exam Analysis</h2>
+                    <h2 class="mt-2">Streamline Your Joint, CATs and RATs analysis Insights Effortlessly</h2>
                 </div>
-                <p class="mb-4">JamaJoint is your all-in-one solution for joint exam analysis, designed to empower high school teachers. Bid farewell to manual processes and Excel headaches. Our platform ensures meticulous examination analysis, providing accurate insights into school, stream, and student performances.</p>
+                <p class="mb-4">Welcome to JamaJoint, where exam analysis meets simplicity. Say goodbye to the complexities of manual processes and Excel headaches. Our platform ensures meticulous examination analysis, providing insightful reports on school, stream, and student performances.</p>
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Meticulous Analysis</h6>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center mt-4">
-                    <a class="btn btn-primary rounded-pill px-4 me-3" href="#">Learn More</a>
+                    <a class="btn btn-primary rounded-pill px-4 me-3" href="#">Explore More</a>
                     <a class="btn btn-outline-primary btn-square me-3" href="#"><i class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-outline-primary btn-square me-3" href="#"><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-outline-primary btn-square me-3" href="#"><i class="fab fa-instagram"></i></a>
@@ -37,6 +37,7 @@
         </div>
     </div>
 </div>
+
 
 
 <!-- About End -->

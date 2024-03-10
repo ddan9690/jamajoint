@@ -6,7 +6,6 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MarkController;
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SchoolController;
@@ -17,7 +16,6 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\VisualsAndInsights;
-use App\Http\Controllers\CyberPaperController;
 use App\Http\Controllers\ExamSchoolController;
 use App\Http\Controllers\PdfDownloadController;
 use App\Http\Controllers\ExcelDownloadController;
@@ -184,8 +182,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    Route::get('cyberpapers', [CyberPaperController::class, 'index'])->name('cyberpapers.index');
-    Route::get('cyberpapers/download/{id}', [CyberPaperController::class, 'download'])->name('cyberpapers.download');
+
 });
 
 Route::middleware(['auth', 'admin'])->prefix('manage')->group(function () {
@@ -239,14 +236,6 @@ Route::middleware(['auth', 'admin'])->prefix('manage')->group(function () {
     Route::put('/gradings/{id}', [GradingController::class, 'update'])->name('gradings.update');
     Route::delete('/gradings/{id}', [GradingController::class, 'destroy'])->name('gradings.destroy');
 
-
-    Route::get('cyberpapers/create', [CyberPaperController::class, 'create'])->name('cyberpapers.create');
-    Route::post('cyberpapers/store', [CyberPaperController::class, 'store'])->name('cyberpapers.store');
-    Route::get('cyberpapers/{cyberpaper}', [CyberPaperController::class, 'show'])->name('cyberpapers.show');
-    Route::get('cyberpapers/{cyberpaper}/edit', [CyberPaperController::class, 'edit'])->name('cyberpapers.edit');
-    Route::put('cyberpapers/{cyberpaper}', [CyberPaperController::class, 'update'])->name('cyberpapers.update');
-    Route::delete('cyberpapers/{cyberPaper}', [CyberPaperController::class, 'destroy'])->name('cyberpapers.destroy');
-
     Route::get('invoices', [InvoiceController::class, 'index'])->name('invoices.index');
     Route::get('invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
     Route::post('invoices', [InvoiceController::class, 'store'])->name('invoices.store');
@@ -255,11 +244,5 @@ Route::middleware(['auth', 'admin'])->prefix('manage')->group(function () {
     Route::get('invoices/{id}/download-pdf', [PdfDownloadController::class, 'downloadInvoice'])
         ->name('invoice.pdf');
 
-    // news
-    Route::get('/latest-news-home', [NewsController::class, 'index'])->name('news.index');
-    Route::get('/latest-news/create', [NewsController::class, 'create'])->name('news.create');
-    Route::post('/latest-news', [NewsController::class, 'store'])->name('news.store');
-    Route::get('/latest-news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
-    Route::put('/latest-news/{news}', [NewsController::class, 'update'])->name('news.update');
-    Route::delete('/latest-news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
+
 });

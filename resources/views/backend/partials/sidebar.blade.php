@@ -14,15 +14,6 @@
         </a>
     </li>
     <hr class="sidebar-divider">
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('cyberpapers.index') }}">
-            <i class="fas fa-fw fa-pencil-alt"></i>
-            <span>Cyber Exam papers</span>
-        </a>
-    </li>
-
-
-
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('schools.index') }}">
@@ -60,20 +51,6 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('news.index') }}">
-            <i class="fas fa-fw fa-newspaper"></i>
-            <span>Manage News</span>
-        </a>
-    </li>
-
-    {{-- <!-- Add the following code for the Invoice Index link -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('invoices.index') }}">
-            <i class="fas fa-fw fa-file-invoice"></i>
-            <span>Invoices</span>
-        </a>
-    </li> --}}
     @endcan
 
 </ul>

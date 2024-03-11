@@ -208,44 +208,44 @@
         <div class="owl-carousel testimonial-carousel">
             <div class="testimonial-item bg-transparent border rounded text-white p-4">
                 <i class="fa fa-quote-left fa-2x mb-3"></i>
-                <p>JamaJoint has truly transformed the way we handle joint exam analysis. The platform's accuracy and user-friendly interface have made the process seamless. It has become an essential tool for our school's success.</p>
+                <p>Jamajoint is amazing! It makes analyzing joint exams easy and accurate. The user-friendly design is a big plus. I highly recommend it.</p>
                 <div class="d-flex align-items-center">
-                    <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/testimonial-1.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
+                    <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/kokuro.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
                     <div class="ps-3">
-                        <h6 class="text-white mb-1">John Doe</h6>
-                        <small>High School Teacher</small>
+                        <h6 class="text-white mb-1">McKorucho</h6>
+                        <small>Teacher</small>
                     </div>
                 </div>
             </div>
             <div class="testimonial-item bg-transparent border rounded text-white p-4">
                 <i class="fa fa-quote-left fa-2x mb-3"></i>
-                <p>Using JamaJoint has been a game-changer for us. The detailed analysis reports and insights provided have helped us identify areas of improvement and celebrate our successes. It's a must-have tool for any high school teacher.</p>
+                <p>We used JamaJoint for our SharpShooters CRE joint analysis, and I was impressed. It's worth considering for any joint out there. Easy to use and provides accurate insights.</p>
                 <div class="d-flex align-items-center">
-                    <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/testimonial-2.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
+                    <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/gordon-stanley.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
                     <div class="ps-3">
-                        <h6 class="text-white mb-1">Jane Smith</h6>
-                        <small>Subject Coordinator</small>
+                        <h6 class="text-white mb-1">Gordon Stanley</h6>
+                        <small>Sharspshooters CRE Joint Coordinator</small>
                     </div>
                 </div>
             </div>
             <div class="testimonial-item bg-transparent border rounded text-white p-4">
                 <i class="fa fa-quote-left fa-2x mb-3"></i>
-                <p>We have been using JamaJoint for several years now, and it has become an integral part of our examination process. The platform's reliability and the ability to generate comprehensive reports make it an invaluable asset for our educational institution.</p>
+                <p>JamaJoint is fantastic! It's easy, accurate, and the reports help us a lot. I recommend it for any school</p>
                 <div class="d-flex align-items-center">
-                    <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/testimonial-3.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
+                    <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/amos-raini.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
                     <div class="ps-3">
-                        <h6 class="text-white mb-1">Robert Johnson</h6>
-                        <small>School Administrator</small>
+                        <h6 class="text-white mb-1">Amos Raini</h6>
+                        <small>Teacher</small>
                     </div>
                 </div>
             </div>
             <div class="testimonial-item bg-transparent border rounded text-white p-4">
                 <i class="fa fa-quote-left fa-2x mb-3"></i>
-                <p>JamaJoint has simplified our examination analysis process, allowing us to focus more on enhancing our teaching methods. The user-friendly platform and insightful reports have positively impacted our school's overall academic performance.</p>
+                <p>JamaJoint has simplified our examination analysis process, allowing us to focus more on enhancing our teaching methods. The user-friendly platform and insightful reports have positively impacted our department analysis process</p>
                 <div class="d-flex align-items-center">
-                    <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/testimonial-4.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
+                    <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('frontend/img/chacha-samuel.jpg') }}" style="width: 50px; height: 50px;" alt="Client Image">
                     <div class="ps-3">
-                        <h6 class="text-white mb-1">Maria Rodriguez</h6>
+                        <h6 class="text-white mb-1">Chacha Samuel</h6>
                         <small>Mathematics Teacher</small>
                     </div>
                 </div>

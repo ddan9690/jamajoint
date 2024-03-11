@@ -31,6 +31,10 @@ Route::get('/features', function () {
     return view('features');
 });
 
+Route::get('/pricing', function () {
+    return view('pricing');
+});
+
 
 
 

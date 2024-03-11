@@ -15,13 +15,14 @@
     </li>
     <hr class="sidebar-divider">
 
+    @can('admin')
+
     <li class="nav-item">
         <a class="nav-link" href="{{ route('schools.index') }}">
             <i class="fas fa-fw fa-chalkboard-teacher"></i>
             <span>Schools</span>
         </a>
     </li>
-    @can('admin')
     <li class="nav-item">
         <a class="nav-link" href="{{ route('exams.index') }}">
             <i class="fas fa-fw fa-book"></i>

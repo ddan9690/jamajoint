@@ -13,10 +13,10 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a href="#" class="nav-item nav-link active">Home</a>
-                <a href="#" class="nav-item nav-link">About</a>
-                <a href="#" class="nav-item nav-link">Features</a>
-                <a href="#" class="nav-item nav-link">Analysis</a>
-                <a href="#" class="nav-item nav-link">Contact</a>
+                {{-- <a href="#" class="nav-item nav-link">About</a> --}}
+                <a href="/features" class="nav-item nav-link">Features</a>
+                {{-- <a href="#" class="nav-item nav-link">Analysis</a>
+                <a href="#" class="nav-item nav-link">Contact</a> --}}
             </div>
             <button type="button" class="btn text-secondary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="fa fa-search"></i>
@@ -40,7 +40,7 @@
                     <a href="#" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
                 </div>
                 <div class="col-lg-6 text-center text-lg-start">
-                    <img class="img-fluid" src="{{ asset('path/to/jamajoint-hero-image.png') }}" alt="JamaJoint Image">
+                    {{-- <img class="img-fluid" src="{{ asset('frontend/img/jamamobile.png') }}" alt="JamaJoint Image"> --}}
                 </div>
             </div>
         </div>

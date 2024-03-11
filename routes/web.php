@@ -27,6 +27,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/features', function () {
+    return view('features');
+});
+
 
 
 

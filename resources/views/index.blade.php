@@ -106,7 +106,7 @@
 
 
 <!-- Portfolio Start -->
-<div class="container-xxl py-5">
+{{-- <div class="container-xxl py-5">
     <div class="container px-lg-5">
         <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="position-relative d-inline text-primary ps-4">Our Projects</h6>
@@ -198,7 +198,7 @@
         </div>
 
     </div>
-</div>
+</div> --}}
 <!-- Portfolio End -->
 
 
@@ -300,7 +300,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+            {{-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
                 <div class="team-item">
                     <div class="d-flex">
                         <div class="flex-shrink-0 d-flex flex-column align-items-center mt-4 pt-5" style="width: 75px;">
@@ -316,7 +316,7 @@
                         <small>Designer</small>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

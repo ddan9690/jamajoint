@@ -20,7 +20,7 @@
                 <p>Subject: {{ $subject->name }}</p>
             </div>
         </div>
-        <p style="color: green;">Integrity,Honesty,Proffessionalism is key!</p>
+        {{-- <p style="color: green;">Integrity,Honesty,Proffessionalism is key!</p> --}}
 
         <div class="row">
             <div class="col-md-12">

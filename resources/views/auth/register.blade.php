@@ -84,8 +84,8 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputSchool">School</label>
-                                            <span style="color: green;">(If your school is not listed, contact
-                                                admin)</span>
+                                            {{-- <span style="color: green;">(If your school is not listed, contact
+                                                admin)</span> --}}
                                             <select class="form-control" id="exampleInputSchool" name="school_id"
                                                 placeholder="Select a school">
                                                 <option value="" disabled>Select a school</option>

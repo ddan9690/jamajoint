@@ -279,7 +279,7 @@
                     </div>
                     <div class="px-4 py-3">
                         <h5 class="fw-bold m-0">Dancan Okeyo</h5>
-                        <small>Founder</small>
+                        <small>Teacher</small>
                     </div>
                 </div>
             </div>

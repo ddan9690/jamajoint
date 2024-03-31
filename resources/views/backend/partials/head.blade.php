@@ -9,7 +9,7 @@
     <meta name="keywords" content="JamaJoint, Exam Analysis, High School, Secondary School, Teachers, Departmental Examinations, Joint Examinations, CATs, RATs, Meticulous Analysis">
     <meta name="description" content="JamaJoint - Your platform for comprehensive and quick exam analysis tailored for teachers. Effortlessly analyze student results for joint and internal departmental examinations, CATs, and RATs. Empower teachers with insightful performance analytics, efficient analysis tools, and streamlined processes. Say goodbye to manual tasks and embrace the simplicity of education analysis with JamaJoint.">
 
-    <<!-- Favicon -->
+
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/favicon/favicon-16x16.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/favicon/favicon-32x32.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend/img/favicon/apple-touch-icon.png') }}">

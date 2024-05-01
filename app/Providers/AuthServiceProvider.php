@@ -34,5 +34,16 @@ class AuthServiceProvider extends ServiceProvider
 
             return $user->role === 'admin' || $user->role === 'super' || $school->id === $user->school_id;
         });
+
+        Gate::define('view-exam', function ($user, $exam) {
+            // Super users can see all exams
+            if ($user->role === 'super') {
+                return true;
+            }
+
+            // Check if the user's school is registered for the exam
+            return $exam->schools()->where('school_id', $user->school_id)->exists();
+        });
+
     }
 }

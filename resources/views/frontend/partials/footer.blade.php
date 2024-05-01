@@ -4,7 +4,7 @@
         <div class="row g-5">
             <div class="col-md-6 col-lg-3 mx-auto text-center">
                 <h5 class="text-white mb-4">Get In Touch</h5>
-                <p><i class="fa fa-phone-alt me-3"></i>+0711317235</p>
+                <p><i class="fa fa-phone-alt me-3"></i>0711317235</p>
                 <p><i class="fa fa-envelope me-3"></i>ddan9690@gmail.com</p>
                 <div class="d-flex pt-2">
                     <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
@@ -71,7 +71,7 @@
                         <a href="">Home</a>
                         <a href="">Cookies</a>
                         <a href="">Help</a>
-                        <a href="">FQAs</a>
+                        <a href="/faq">FQAs</a>
                     </div>
                 </div>
             </div>

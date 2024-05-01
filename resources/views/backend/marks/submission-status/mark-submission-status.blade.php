@@ -14,23 +14,23 @@
                 <table class="table table-responsive table-striped table-sm table-bordered table-hover">
                     <thead>
                         <tr>
-
                             <th>Exam</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($exams as $exam)
-                            <tr>
+                            @can('view-manage-exam', $exam)
+                                <tr>
+                                    <td>{{ $exam->name }} T{{ $exam->term }} {{ $exam->year }}</td>
 
-                                <td>{{ $exam->name }} T{{ $exam->term }} {{ $exam->year }}</td>
-
-                                <td>
-                                    <a href="{{ route('marks.schoolsRegistered', $exam->id) }}" class="btn btn-secondary btn-sm">
-                                        View
-                                    </a>
-                                </td>
-                            </tr>
+                                    <td>
+                                        <a href="{{ route('marks.schoolsRegistered', $exam->id) }}" class="btn btn-secondary btn-sm">
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endcan
                         @endforeach
                     </tbody>
                 </table>

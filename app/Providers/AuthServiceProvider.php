@@ -45,5 +45,20 @@ class AuthServiceProvider extends ServiceProvider
             return $exam->schools()->where('school_id', $user->school_id)->exists();
         });
 
+         // Admin can only view and manage exams where their school is registered
+         Gate::define('view-manage-exam', function ($user, $exam) {
+            // Super users can access all exams
+            if (Gate::allows('super', $user)) {
+                return true;
+            }
+
+            // Admin can only manage exams where their school is registered
+            if ($user->role === 'admin') {
+                return $exam->schools()->where('school_id', $user->school_id)->exists();
+            }
+
+            return false;
+        });
+
     }
 }

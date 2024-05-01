@@ -1,7 +1,7 @@
 <!-- Navbar & Hero Start -->
 <div class="container-xxl position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-        <a href="" class="navbar-brand p-0">
+        <a href="/" class="navbar-brand p-0">
             <h1 class="m-0">
                 <img src="{{ asset('frontend/img/jamajoint-logo.png') }}" alt="Jamajoint Logo" class="logo-img me-2">
                 Jama<span>Joint</span>
@@ -15,7 +15,7 @@
                 <a href="/" class="nav-item nav-link active">Home</a>
                {{-- <a href="#" class="nav-item nav-link">About</a> --}}
                 <a href="/features" class="nav-item nav-link">Features</a>
-                <a href="/faq" class="nav-item nav-link">FAQs</a>
+                <a href="{{ route('faq') }}" class="nav-item nav-link">FAQs</a>
                 {{-- <a href="#" class="nav-item nav-link">Contact</a> --}}
             </div>
             <button type="button" class="btn text-secondary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal">

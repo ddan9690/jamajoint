@@ -71,7 +71,7 @@
                         <a href="">Home</a>
                         <a href="">Cookies</a>
                         <a href="">Help</a>
-                        <a href="/faq">FQAs</a>
+                        <a href={{ route('faq') }}>FQAs</a>
                     </div>
                 </div>
             </div>

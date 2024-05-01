@@ -33,7 +33,7 @@ Route::get('/features', function () {
 
 Route::get('/faq', function () {
     return view('faq');
-});
+})->name('faq');
 
 Route::get('/pricing', function () {
     return view('pricing');

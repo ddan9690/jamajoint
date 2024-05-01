@@ -15,7 +15,7 @@
                 <a href="/" class="nav-item nav-link active">Home</a>
                {{-- <a href="#" class="nav-item nav-link">About</a> --}}
                 <a href="/features" class="nav-item nav-link">Features</a>
-                {{-- <a href="/pricing" class="nav-item nav-link">Pricing</a> --}}
+                <a href="/faq" class="nav-item nav-link">FAQs</a>
                 {{-- <a href="#" class="nav-item nav-link">Contact</a> --}}
             </div>
             <button type="button" class="btn text-secondary ms-3" data-bs-toggle="modal" data-bs-target="#searchModal">

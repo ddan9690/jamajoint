@@ -133,6 +133,9 @@
                                             Account</a>
                                     </div>
                                     <div class="text-center">
+                                        {{-- <a href="{{ route('login.facebook') }}"
+                                            class="btn btn-primary btn-block">Register with Facebook</a> --}}
+
                                     </div>
                                 </div>
                             </div>

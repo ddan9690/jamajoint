@@ -7,20 +7,24 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="JamaJoint, Exam Analysis, Teachers, Departmental Examinations, Joint Examinations, CATs, RATs, Meticulous Analysis, High School, Secondary School">
-    <meta name="description" content="JamaJoint - Your platform for comprehensive and quick exam analysis tailored for teachers. Effortlessly analyze student results for joint and internal departmental examinations, CATs, and RATs. Empower teachers with insightful performance analytics, efficient analysis tools, and streamlined processes. Say goodbye to manual tasks and embrace the simplicity of education analysis with JamaJoint.">
+    <meta name="keywords"
+        content="JamaJoint, Exam Analysis, Teachers, Departmental Examinations, Joint Examinations, CATs, RATs, Meticulous Analysis, High School, Secondary School">
+    <meta name="description"
+        content="JamaJoint - Your platform for comprehensive and quick exam analysis tailored for teachers. Effortlessly analyze student results for joint and internal departmental examinations, CATs, and RATs. Empower teachers with insightful performance analytics, efficient analysis tools, and streamlined processes. Say goodbye to manual tasks and embrace the simplicity of education analysis with JamaJoint.">
 
 
     <meta name="msapplication-TileColor" content="#ffffff">
 
-     <!-- Favicon -->
-<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/favicon/favicon-16x16.png') }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/favicon/favicon-32x32.png') }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend/img/favicon/apple-touch-icon.png') }}">
-<link rel="icon" type="image/png" sizes="192x192" href="{{ asset('frontend/img/favicon/android-chrome-192x192.png') }}">
-<link rel="icon" type="image/png" sizes="512x512" href="{{ asset('frontend/img/favicon/android-chrome-512x512.png') }}">
-<link rel="icon" type="image/x-icon" href="{{ asset('frontend/img/favicon/favicon.ico') }}">
-<link rel="manifest" href="{{ asset('frontend/img/favicon/site.webmanifest') }}">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/favicon/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/favicon/favicon-32x32.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend/img/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"
+        href="{{ asset('frontend/img/favicon/android-chrome-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512"
+        href="{{ asset('frontend/img/favicon/android-chrome-512x512.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/img/favicon/favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('frontend/img/favicon/site.webmanifest') }}">
 
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
@@ -161,8 +165,15 @@
                                         <a class="font-weight-bold small" href="{{ route('login') }}">Already have an
                                             account? Login</a>
                                     </div>
+
+                                    {{-- facebook register --}}
+                                    <!-- Add this button under the 'Register' button in your form -->
                                     <div class="text-center">
+                                        {{-- <a href="{{ route('login.facebook') }}"
+                                            class="btn btn-primary btn-block">Register with Facebook</a> --}}
+
                                     </div>
+
                                 </div>
                             </div>
                         </div>

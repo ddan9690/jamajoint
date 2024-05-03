@@ -69,9 +69,9 @@
                 <div class="col-md-6 text-center text-md-end">
                     <div class="footer-menu">
                         <a href="">Home</a>
-                        <a href="">Cookies</a>
-                        <a href="">Help</a>
+                        <a href="{{ route('terms-of-service') }}">Terms of Service</a>
                         <a href={{ route('faq') }}>FQAs</a>
+                        <a href={{ route('privacy-policy') }}>Privacy Policy</a>
                     </div>
                 </div>
             </div>

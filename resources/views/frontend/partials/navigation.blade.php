@@ -37,7 +37,7 @@
                     <h1 class="text-white mb-4 animated zoomIn">Simplify Joint Exam Analysis with JamaJoint</h1>
                     <p class="text-white pb-3 animated zoomIn">Make your work quick and simple. JamaJoint lets you analyze joint exams, CATs, and RATs with ease. No more tedious Excel tasks!</p>
                     <a href="{{ route('dashboard') }}" class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Get Started</a>
-                    <a href="#" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
+                    <a href="/contact-us" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
                 </div>
                 <div class="col-lg-6 text-center text-lg-start">
                     {{-- <img class="img-fluid" src="{{ asset('frontend/img/jamamobile.png') }}" alt="JamaJoint Image"> --}}

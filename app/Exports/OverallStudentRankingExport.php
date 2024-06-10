@@ -2,13 +2,13 @@
 
 namespace App\Exports;
 
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Illuminate\Support\Collection;
 
 class OverallStudentRankingExport implements FromCollection, WithHeadings, ShouldAutoSize, WithCustomStartCell, WithStyles
 {
@@ -23,12 +23,7 @@ class OverallStudentRankingExport implements FromCollection, WithHeadings, Shoul
 
     public function collection()
     {
-        // Convert all data to uppercase
-        $uppercasedData = $this->data->map(function ($row) {
-            return array_map('strtoupper', $row);
-        });
-
-        return $uppercasedData;
+        return $this->data;
     }
 
     public function headings(): array
@@ -49,7 +44,7 @@ class OverallStudentRankingExport implements FromCollection, WithHeadings, Shoul
 
     public function startCell(): string
     {
-        return 'A2'; // Start from cell A2, leaving cell A1 for the merged overall heading
+        return 'A2';
     }
 
     public function styles(Worksheet $sheet)
@@ -61,8 +56,11 @@ class OverallStudentRankingExport implements FromCollection, WithHeadings, Shoul
         $overallHeading = $this->examDetails['name'] . ' - Term ' . $this->examDetails['term']  . ' ' . $this->examDetails['year'];
         $sheet->setCellValue('A1', $overallHeading);
 
-        // Set font size and center align the overall heading
-        $sheet->getStyle('A1')->getFont()->setSize(16);
+        // Set font size, bold, and center align the overall heading
+        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
+
+        // Set font size and bold for headings
+        $sheet->getStyle('A2:J2')->getFont()->setBold(true)->setSize(12);
     }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>
-        Paper 1 Analysis
+        Paper 1 Results - My School
     </title>
     <style>
         /* Include styles from the first template for consistent design */
@@ -16,22 +16,16 @@
 
         .container {
             max-width: 100%;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 10px auto;
+            padding: 10px;
             text-align: center;
-        }
-
-        .logo {
-            max-width: 150px;
-            margin: 0 auto 10px;
-            display: block;
         }
 
         .table {
             width: 100%;
             border-collapse: collapse;
             margin: 0 auto;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             font-family: Arial, sans-serif;
             font-size: 10px;
             /* Set the font size */
@@ -77,13 +71,20 @@
             font-weight: bold;
             text-align: center;
             font-family: Arial, sans-serif;
-            font-size: 12px;
+            font-size: 16px;
             /* Set the font size */
+            text-decoration: underline;
+            margin-bottom: 5px; /* Adjust spacing between exam details and Paper 1 */
         }
 
         .subheading-paper-1 {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 0; /* Remove default margin */
+            margin-bottom: 5px; /* Adjust spacing between Paper 1 and table */
+        }
+
+        .subheading-paper-1 strong {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -95,7 +96,7 @@
         </h5>
 
         <h4 class="subheading-paper-1">
-            <strong>**PAPER 1**</strong>
+            <strong><u>PAPER 1 - {{ $school->name }}</u></strong>
         </h4>
         <table class="table">
             <thead>
@@ -136,13 +137,7 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $sortedAnalysis = collect($analysis)->sortByDesc('mean');
-                    $overallTotal = 0;
-                    $overallMean = 0;
-                @endphp
-
-                @foreach ($sortedAnalysis as $item)
+                @foreach ($analysis as $item)
                     <tr>
                         <td>{{ $item['stream'] }}</td>
                         @foreach ($gradingSystem as $grade)
@@ -155,11 +150,15 @@
 
                 <tr class="overall-row">
                     <td>Overall</td>
+                    @php
+                        $overallTotal = 0;
+                        $overallMean = 0;
+                    @endphp
                     @foreach ($gradingSystem as $grade)
                         <td>
                             @php
                                 $gradeCount = 0;
-                                foreach ($sortedAnalysis as $item) {
+                                foreach ($analysis as $item) {
                                     $gradeCount += $item['grades'][$grade->grade];
                                 }
                                 echo $gradeCount;

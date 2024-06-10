@@ -37,16 +37,17 @@
                         <th>MEAN</th>
                     </tr>
                 </thead>
-                @foreach ($schoolMeans as $index => $schoolData)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $schoolData['school']->name }}</td>
-                    <td>{{ $schoolData['school']->county }}</td>
-                    <td>{{ $schoolData['ranked_students_count'] }}</td>
-                    <td>{{ $schoolData['school_mean'] }}</td>
-                </tr>
-            @endforeach
-
+                <tbody>
+                    @foreach ($schoolMeans as $index => $schoolData)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $schoolData['school']->name }}</td>
+                        <td>{{ $schoolData['school']->county }}</td>
+                        <td>{{ $schoolData['ranked_students_count'] }}</td>
+                        <td>{{ $schoolData['school_mean'] }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>
@@ -57,7 +58,9 @@
 <script>
     $(document).ready(function () {
         $('#school-ranking-table').DataTable({
-            "pageLength": 50
+            "pageLength": 50,
+            "processing": true, // Add processing option
+            "serverSide": false, // Change to false if data is static
         });
 
     });

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PdfDownloadController extends Controller
 {
+
     public function downloadStudentResultsPdf($id, $form_id, $slug)
     {
         // Retrieve the exam
@@ -45,6 +46,12 @@ class PdfDownloadController extends Controller
             return $subject1Marks > 0 && $subject2Marks > 0;
         });
 
+        // Get the grading system ID associated with the exam
+        $gradingSystemId = $exam->grading_system_id;
+
+        // Retrieve the grading system associated with the exam
+        $gradingSystem = Grading::where('grading_system_id', $gradingSystemId)->get();
+
         // Calculate the average marks and assign grades for both subjects for each filtered student
         foreach ($filteredStudents as $student) {
             $subject1Marks = Mark::where('student_id', $student->id)
@@ -61,7 +68,7 @@ class PdfDownloadController extends Controller
             $average = round(($subject1Marks + $subject2Marks) / 2);
 
             // Determine the grade based on the grading system
-            $grade = Grading::where('low', '<=', $average)
+            $grade = $gradingSystem->where('low', '<=', $average)
                 ->where('high', '>=', $average)
                 ->first();
 
@@ -85,6 +92,7 @@ class PdfDownloadController extends Controller
             'exam' => $exam,
             'school' => $school,
             'results' => $results,
+            'gradingSystem' => $gradingSystem,
         ]);
 
         // Create a custom filename for the student results PDF
@@ -101,6 +109,12 @@ class PdfDownloadController extends Controller
 
         // Get the authenticated user's school
         $school = School::where('slug', $slug)->firstOrFail();
+
+        // Get the grading system ID associated with the exam
+        $gradingSystemId = $exam->grading_system_id;
+
+        // Retrieve the grading system associated with the exam
+        $gradingSystem = Grading::where('grading_system_id', $gradingSystemId)->get();
 
         // Get the students from the school for the specified form
         $students = $school->students->where('form_id', $form_id);
@@ -140,9 +154,7 @@ class PdfDownloadController extends Controller
             $average = round(($subject1Marks + $subject2Marks) / 2);
 
             // Determine the grade based on the grading system
-            $grade = Grading::where('low', '<=', $average)
-                ->where('high', '>=', $average)
-                ->first();
+            $grade = $this->calculateGrade($average, $gradingSystem);
 
             // Store the student's result for both subjects
             $results[] = [
@@ -150,7 +162,7 @@ class PdfDownloadController extends Controller
                 'subject1Marks' => $subject1Marks,
                 'subject2Marks' => $subject2Marks,
                 'average' => $average,
-                'grade' => $grade ? $grade->grade : 'N/A',
+                'grade' => $grade,
             ];
         }
 
@@ -161,9 +173,6 @@ class PdfDownloadController extends Controller
 
         // Calculate grade analysis for both subjects
         $analysis = [];
-
-        // Retrieve the grading system from the database
-        $gradingSystem = Grading::all();
 
         // Group students by stream for both subjects
         $studentsByStream = $filteredStudents->groupBy('stream.name');
@@ -246,8 +255,8 @@ class PdfDownloadController extends Controller
         // Retrieve all schools registered for the exam
         $schools = ExamSchool::where('exam_id', $exam->id)->with('school')->get();
 
-        // Retrieve the grading system from the database
-        $gradingSystem = Grading::all();
+        // Retrieve the grading system for the exam
+        $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
 
         // Initialize arrays to store top-performing boys and girls
         $topBoys = [];
@@ -314,8 +323,8 @@ class PdfDownloadController extends Controller
         $topBoys = $this->getTopPerformersWithTies($topBoys, 10);
         $topGirls = $this->getTopPerformersWithTies($topGirls, 10);
 
-        // Load the PDF view with the results
-        $data = compact('exam', 'topBoys', 'topGirls');
+        // Load the PDF view with the results and grading system
+        $data = compact('exam', 'topBoys', 'topGirls', 'gradingSystem');
         $pdf = PDF::loadView('backend.downloads.top_performances', $data);
 
         // Name the PDF file based on the exam details
@@ -362,8 +371,8 @@ class PdfDownloadController extends Controller
         // Retrieve the exam
         $exam = Exam::findOrFail($id);
 
-        // Retrieve the grading system from the database
-        $gradingSystem = Grading::all();
+        // Retrieve the grading system associated with the exam
+        $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
 
         // Retrieve the streams of all schools registered for the exam
         $examSchools = ExamSchool::where('exam_id', $exam->id)->with('school.streams')->get();
@@ -447,6 +456,7 @@ class PdfDownloadController extends Controller
         return $pdf->stream($pdfFileName);
     }
 
+
     public function downloadInvoice(Request $request, $id)
     {
         // Retrieve the invoice by its ID
@@ -468,8 +478,8 @@ class PdfDownloadController extends Controller
         // Retrieve the exam
         $exam = Exam::findOrFail($id);
 
-        // Retrieve the grading system from the database
-        $gradingSystem = Grading::all();
+        // Retrieve the grading system associated with the exam
+        $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
 
         // Retrieve all schools registered for the exam
         $examSchools = ExamSchool::where('exam_id', $exam->id)->with('school')->get();
@@ -483,40 +493,40 @@ class PdfDownloadController extends Controller
             // Filter students of the specific form for this exam
             $students = $school->students->where('form_id', $exam->form_id);
 
-            // Filter students to include only those with marks in both Paper 1 and Paper 2
+            // Filter students to include only those with marks in both subjects
             $filteredStudents = $students->filter(function ($student) use ($exam) {
-                $paper1Marks = Mark::where('student_id', $student->id)
+                $subject1Marks = Mark::where('student_id', $student->id)
                     ->where('exam_id', $exam->id)
                     ->where('subject_id', 1)
                     ->sum('marks');
 
-                $paper2Marks = Mark::where('student_id', $student->id)
+                $subject2Marks = Mark::where('student_id', $student->id)
                     ->where('exam_id', $exam->id)
                     ->where('subject_id', 2)
                     ->sum('marks');
 
-                // Check if both Paper 1 and Paper 2 marks exist for the student
-                return $paper1Marks > 0 && $paper2Marks > 0;
+                // Check if both subject marks are greater than 0
+                return $subject1Marks > 0 && $subject2Marks > 0;
             });
 
             $gradesCount = [];
             $rankedStudentsCount = 0; // Initialize the count of ranked students
 
             foreach ($filteredStudents as $student) {
-                $paper1Marks = Mark::where('student_id', $student->id)
+                $subject1Marks = Mark::where('student_id', $student->id)
                     ->where('exam_id', $exam->id)
                     ->where('subject_id', 1)
                     ->sum('marks');
 
-                $paper2Marks = Mark::where('student_id', $student->id)
+                $subject2Marks = Mark::where('student_id', $student->id)
                     ->where('exam_id', $exam->id)
                     ->where('subject_id', 2)
                     ->sum('marks');
 
-                // Calculate the average for the two papers
-                $average = round(($paper1Marks + $paper2Marks) / 2);
+                // Calculate the average for the two subjects
+                $average = round(($subject1Marks + $subject2Marks) / 2);
 
-                // Determine the grade based on the grading system
+                // Determine the grade based on the grading system associated with the exam
                 $grade = $this->calculateGrade($average, $gradingSystem);
 
                 // Count the number of students in each grade category
@@ -560,9 +570,11 @@ class PdfDownloadController extends Controller
         // Name the PDF file based on the exam details
         $pdfFileName = str_replace(' ', '_', $exam->name . '_Term_' . $exam->term . '_' . $exam->year . '_School_Ranking') . '.pdf';
 
-        // Return the PDF for download
-        return $pdf->stream($pdfFileName);
+        // Return the PDF for download with inline display
+        return $pdf->download($pdfFileName);
     }
+
+
 
     public function downloadPaper1Pdf($exam_id, $form_id, $slug)
     {
@@ -597,16 +609,17 @@ class PdfDownloadController extends Controller
                 ->where('subject_id', 1)
                 ->sum('marks');
 
+            // Retrieve the grading system for the exam
+            $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
+
             // Determine the grade based on the grading system
-            $grade = Grading::where('low', '<=', $paper1Marks)
-                ->where('high', '>=', $paper1Marks)
-                ->first();
+            $grade = $this->calculateGrade($paper1Marks, $gradingSystem);
 
             // Store the student's result for Paper 1
             $results[] = [
                 'student' => $student,
                 'paper1Marks' => $paper1Marks,
-                'grade' => $grade ? $grade->grade : 'N/A',
+                'grade' => $grade,
             ];
         }
 
@@ -618,22 +631,12 @@ class PdfDownloadController extends Controller
         // Calculate grade analysis for Paper 1
         $analysis = [];
 
-        // Retrieve the grading system from the database
-        $gradingSystem = Grading::all();
-
         // Group students by stream for Paper 1
         $studentsByStream = $filteredStudents->groupBy('stream.name');
 
         foreach ($studentsByStream as $streamName => $streamStudents) {
-            // Filter students to include only those with marks greater than 0 in Paper 1
-            $streamStudents = $streamStudents->filter(function ($student) use ($exam) {
-                $paper1Marks = Mark::where('student_id', $student->id)
-                    ->where('exam_id', $exam->id)
-                    ->where('subject_id', 1)
-                    ->sum('marks');
-
-                return $paper1Marks > 0;
-            });
+            // Retrieve the grading system for the exam
+            $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
 
             $gradesCount = [];
 
@@ -712,6 +715,8 @@ class PdfDownloadController extends Controller
         return $pdf->download($fileName);
     }
 
+
+
     public function downloadPaper2Pdf($exam_id, $form_id, $slug)
     {
         // Retrieve the exam
@@ -745,16 +750,17 @@ class PdfDownloadController extends Controller
                 ->where('subject_id', 2)
                 ->sum('marks');
 
+            // Retrieve the grading system for the exam
+            $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
+
             // Determine the grade based on the grading system
-            $grade = Grading::where('low', '<=', $paper2Marks)
-                ->where('high', '>=', $paper2Marks)
-                ->first();
+            $grade = $this->calculateGrade($paper2Marks, $gradingSystem);
 
             // Store the student's result for Paper 2
             $results[] = [
                 'student' => $student,
                 'paper2Marks' => $paper2Marks,
-                'grade' => $grade ? $grade->grade : 'N/A',
+                'grade' => $grade,
             ];
         }
 
@@ -766,24 +772,14 @@ class PdfDownloadController extends Controller
         // Calculate grade analysis for Paper 2
         $analysis = [];
 
-        // Retrieve the grading system from the database
-        $gradingSystem = Grading::all();
-
         // Group students by stream for Paper 2
         $studentsByStream = $filteredStudents->groupBy('stream.name');
 
         foreach ($studentsByStream as $streamName => $streamStudents) {
-            // Filter students to include only those with marks greater than 0 in Paper 2
-            $streamStudents = $streamStudents->filter(function ($student) use ($exam) {
-                $paper2Marks = Mark::where('student_id', $student->id)
-                    ->where('exam_id', $exam->id)
-                    ->where('subject_id', 2)
-                    ->sum('marks');
-
-                return $paper2Marks > 0;
-            });
-
             $gradesCount = [];
+
+            // Retrieve the grading system from the database
+            $gradingSystem = Grading::all();
 
             // Initialize the gradesCount array with zeros
             foreach ($gradingSystem as $grade) {
@@ -860,5 +856,6 @@ class PdfDownloadController extends Controller
         // Download the PDF file
         return $pdf->download($fileName);
     }
+
 
 }

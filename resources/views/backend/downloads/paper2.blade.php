@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>
@@ -14,20 +15,15 @@
         }
         .container {
             max-width: 100%;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 10px auto; /* Adjust margin for spacing */
+            padding: 10px;
             text-align: center;
-        }
-        .logo {
-            max-width: 150px;
-            margin: 0 auto 10px;
-            display: block;
         }
         .table {
             width: 100%;
             border-collapse: collapse;
             margin: 0 auto;
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* Adjust margin for spacing */
             font-family: Arial, sans-serif;
             font-size: 10px; /* Set the font size */
         }
@@ -61,14 +57,20 @@
             text-align: center;
             font-family: Arial, sans-serif;
             font-size: 12px; /* Set the font size */
+            text-decoration: underline;
+            margin-bottom: 5px; /* Adjust spacing between exam details and Paper 2 */
         }
-
         .subheading-paper-2 {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 0; /* Remove default margin */
+            margin-bottom: 5px; /* Adjust spacing between Paper 2 and table */
+        }
+        .subheading-paper-2 strong {
+            font-weight: bold;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h5 class="exam-details">
@@ -76,7 +78,7 @@
         </h5>
 
         <h4 class="subheading-paper-2">
-            <strong>**PAPER 2**</strong>
+            <strong><u>PAPER 2</u></strong>
         </h4>
         <table class="table">
             <thead>
@@ -156,4 +158,5 @@
         </table>
     </div>
 </body>
+
 </html>

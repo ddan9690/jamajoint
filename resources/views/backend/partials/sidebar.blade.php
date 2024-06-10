@@ -23,12 +23,21 @@
             <span>Schools</span>
         </a>
     </li>
+
     <li class="nav-item">
         <a class="nav-link" href="{{ route('exams.index') }}">
             <i class="fas fa-fw fa-book"></i>
             <span>Exams</span>
         </a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('grading_systems.index') }}">
+            <i class="fas fa-fw fa-water"></i>
+            <span>Grading System</span>
+        </a>
+    </li>
+
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('markSubmissionStatus') }}">

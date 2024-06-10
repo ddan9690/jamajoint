@@ -19,6 +19,7 @@ use App\Http\Controllers\VisualsAndInsights;
 use App\Http\Controllers\ExamSchoolController;
 use App\Http\Controllers\PdfDownloadController;
 use App\Http\Controllers\ExcelDownloadController;
+use App\Http\Controllers\GradingSystemController;
 use App\Http\Controllers\PaperAnalysisController;
 
 
@@ -100,6 +101,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/schools/{schoolId}/streams/{streamId}/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
     Route::delete('/schools/{schoolId}/streams/{streamId}/{form}/students/delete-selected', [StudentController::class, 'deleteSelected'])->name('students.deleteSelected');
 
+// grading system manager
+    Route::get('/grading_systems', [GradingSystemController::class, 'index'])->name('grading_systems.index');
+    Route::get('/grading_systems/create', [GradingSystemController::class, 'create'])->name('grading_system.create');
+    Route::post('/grading_systems', [GradingSystemController::class, 'store'])->name('grading_system.store');
+    Route::get('/grading_systems/{id}/edit', [GradingSystemController::class, 'edit'])->name('grading_system.edit');
+    Route::put('/grading_systems/{id}', [GradingSystemController::class, 'update'])->name('grading_system.update');
+    Route::delete('/grading_systems/{id}', [GradingSystemController::class, 'destroy'])->name('grading_system.destroy');
 
     Route::get('/exams', [ExamController::class, 'index'])->name('exams.index');
     // Show exam by ID

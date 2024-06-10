@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use App\Models\Form;
-use App\Models\Paper;
-use App\Models\School;
-use Illuminate\Support\Str;
+use App\Models\GradingSystem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ExamController extends Controller
 {
@@ -17,11 +16,11 @@ class ExamController extends Controller
     public function index()
     {
         $exams = Exam::orderBy('name', 'asc')->get();
-        $forms = Form::all(); // Retrieve all forms
+        $forms = Form::all();
+        $gradingSystems = GradingSystem::orderBy('name')->get();
 
-        return view('backend.exams.index', compact('exams', 'forms'));
+        return view('backend.exams.index', compact('exams', 'forms', 'gradingSystems'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -42,6 +41,7 @@ class ExamController extends Controller
             'form_id' => 'required|exists:forms,id',
             'term' => 'required|integer|in:1,2,3',
             'year' => 'required|integer',
+            'grading_system_id' => 'required|exists:grading_systems,id',
         ]);
 
         // Get the authenticated user's ID or set it to 1 if not authenticated
@@ -58,17 +58,14 @@ class ExamController extends Controller
             'year' => $validatedData['year'],
             'form_id' => $validatedData['form_id'],
             'user_id' => $user_id,
+            'grading_system_id' => $validatedData['grading_system_id'],
         ]);
-
-
 
         // Save the exam instance
         $exam->save();
 
         return response()->json(['message' => 'Exam created successfully']);
     }
-
-
 
     /**
      * Display the specified resource.
@@ -99,8 +96,6 @@ class ExamController extends Controller
         return view('backend.exams.edit', compact('exam', 'forms'));
     }
 
-
-
     /**
      * Update the specified resource in storage.
      */
@@ -129,7 +124,6 @@ class ExamController extends Controller
 
         return redirect()->route('exams.index')->with('success', 'Exam updated successfully.');
     }
-
 
     public function destroy($id)
     {

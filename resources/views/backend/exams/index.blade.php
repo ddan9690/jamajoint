@@ -122,6 +122,16 @@
                         <input type="number" name="year" class="form-control" id="exampleInputYear" required>
                     </div>
 
+                    <div class="form-group">
+                        <label for="grading_system">Grading System</label>
+                        <select name="grading_system_id" id="grading_system" class="form-control" required>
+                            <option value="">Select Grading System</option>
+                            @foreach ($gradingSystems as $gradingSystem)
+                                <option value="{{ $gradingSystem->id }}">{{ $gradingSystem->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-sm btn-primary" id="submitSubject">Create</button>

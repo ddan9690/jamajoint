@@ -9,7 +9,6 @@
         white-space: nowrap; /* Prevent wrapping */
         padding: 0.5rem;
         text-transform: uppercase;
-
     }
 </style>
 <div class="container">
@@ -17,11 +16,7 @@
         <div class="col-md-12">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5>{{ $exam->name }} Form {{ $exam->form->name }} Term {{ $exam->term }} {{ $exam->year }} - Overall Student Ranking</h5>
-
                 <a href="{{ route('excel.overall-student-ranking', ['id' => $exam->id, 'slug' => $exam->slug, 'form_id' => $exam->form_id]) }}" class="btn btn-sm btn-success">Download</a>
-
-
-
             </div>
 
             <!-- Main Results Table -->

@@ -54,7 +54,7 @@
                 </table>
 
                 <!-- Grade Analysis Table for Paper 1 -->
-                <h5 class="text-info text-decoration-underline">Grade Analysis</h5>
+                <h5 class="text-info text-decoration-underline">Paper 1 Grade Analysis</h5>
                 <table id="paper1-analysis-table" class="table table-sm table-responsive align-items-center table-flush table-bordered table-striped">
                     <thead>
                         <tr>

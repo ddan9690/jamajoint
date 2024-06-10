@@ -28,9 +28,12 @@
 
     <div class="row">
         <div class="col-md-12 text-right mb-3">
+            @can('admin')
+
             <a href="{{ route('marks.deleteAll', [$exam->id, $stream->id, $subject->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete all records?');">
                 <i class="fa-solid fa-trash"></i> Delete All
             </a>
+            @endcan
 
             <a href="{{ route('marks.addResult', [$exam->id, $stream->id, $subject->id]) }}" class="btn btn-success btn-sm">
                 <i class="fa-solid fa-plus"></i> Add Result
@@ -45,7 +48,10 @@
                 <th>ADM</th>
                 <th>Name</th>
                 <th>Marks</th>
+                @can('admin')
                 <th>Actions</th>
+
+                @endcan
             </tr>
         </thead>
         <tbody>
@@ -57,6 +63,9 @@
                     <td>{{ $mark->marks }}</td>
                     <td>
                         <div class="btn-group">
+                            @can('admin')
+
+
                             <a href="{{ route('marks.edit', $mark->id) }}" class="btn btn-primary btn-sm">
                                 <i class="fas fa-pencil-alt" style="margin-right: 5px;"></i>
                             </a>
@@ -67,6 +76,8 @@
                                     <i class="fas fa-trash-alt" style="margin-right: 5px;"></i>
                                 </button>
                             </form>
+
+                            @endcan
                         </div>
                     </td>
                 </tr>

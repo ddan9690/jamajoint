@@ -6,6 +6,7 @@ use App\Models\Form;
 use App\Models\School;
 use App\Models\Invoice;
 use App\Models\Subject;
+use App\Models\GradingSystem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -21,6 +22,7 @@ class Exam extends Model
         'user_id',
         'published',
         'form_id',
+        'grading_system_id',
     ];
 
     public function schools()
@@ -41,5 +43,11 @@ class Exam extends Model
 
     public function invoices(){
         return $this->hasMany(Invoice::class);
+    }
+
+
+    public function gradingSystem()
+    {
+        return $this->belongsTo(GradingSystem::class);
     }
 }

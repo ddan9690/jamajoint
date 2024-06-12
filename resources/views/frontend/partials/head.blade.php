@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>JamaJoint - Revolutionizing High School Exam Analysis: Joint Exams, CATs, and RATs Simplified</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="keywords" content="JamaJoint, Exam Analysis, Teachers, Departmental Examinations, Joint Examinations, CATs, RATs, Meticulous Analysis">
+    <meta name="keywords" content="JamaJoint, Jama Joint, History,CRE, Christian Religious Education, Geography, Business Studies, Maths, Mathematics, Exam Analysis, Teachers, Departmental Examinations, High School, Secondary, Joint Examinations, CATs, RATs,Analysis">
     <meta name="description" content="JamaJoint - Your platform for comprehensive and quick exam analysis tailored for teachers. Effortlessly analyze student results for joint and internal departmental examinations, CATs, and RATs. Empower teachers with insightful performance analytics, efficient analysis tools, and streamlined processes. Say goodbye to manual tasks and embrace the simplicity of education analysis with JamaJoint.">
 
 
@@ -49,4 +49,7 @@
         gtag('config', 'G-K2C0JLQK0D');
     </script>
     <!-- End Google Tag Manager -->
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9496284073317725"
+     crossorigin="anonymous"></script>
 </head>

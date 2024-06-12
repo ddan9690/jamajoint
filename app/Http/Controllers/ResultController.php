@@ -580,6 +580,8 @@ class ResultController extends Controller
         return view('backend.results.overall_student_ranking', compact('exam', 'studentMeans', 'gradingSystem'));
     }
 
+
+
 // Helper method to calculate the grade based on the average and grading system
     private function calculateGrade($average, $gradingSystem)
     {

@@ -31,12 +31,7 @@
         </a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('grading_systems.index') }}">
-            <i class="fas fa-fw fa-water"></i>
-            <span>Grading System</span>
-        </a>
-    </li>
+
 
 
     <li class="nav-item">
@@ -54,6 +49,13 @@
             <span>Grading System</span>
         </a>
     </li> --}}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('grading_systems.index') }}">
+            <i class="fas fa-fw fa-water"></i>
+            <span>Grading System</span>
+        </a>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fas fa-fw fa-user"></i>

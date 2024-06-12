@@ -718,144 +718,147 @@ class PdfDownloadController extends Controller
 
 
     public function downloadPaper2Pdf($exam_id, $form_id, $slug)
-    {
-        // Retrieve the exam
-        $exam = Exam::findOrFail($exam_id);
+{
+    // Retrieve the exam
+    $exam = Exam::findOrFail($exam_id);
 
-        // Retrieve the form associated with the exam
-        $form = $exam->form;
+    // Retrieve the form associated with the exam
+    $form = $exam->form;
 
-        // Get the authenticated user's school
-        $school = Auth::user()->school;
+    // Get the authenticated user's school
+    $school = Auth::user()->school;
 
-        // Get the students from the school who are in the same form
-        $students = $school->students->where('form_id', $form->id);
+    // Get the students from the school who are in the same form
+    $students = $school->students->where('form_id', $form->id);
 
-        // Filter students to include only those with marks greater than 0 in Paper 2
-        $filteredStudents = $students->filter(function ($student) use ($exam) {
-            $paper2Marks = Mark::where('student_id', $student->id)
-                ->where('exam_id', $exam->id)
-                ->where('subject_id', 2) // Assuming subject_id 2 is Paper 2
-                ->sum('marks');
+    // Filter students to include only those with marks greater than 0 in Paper 2
+    $filteredStudents = $students->filter(function ($student) use ($exam) {
+        $paper2Marks = Mark::where('student_id', $student->id)
+            ->where('exam_id', $exam->id)
+            ->where('subject_id', 2) // Assuming subject_id 2 is Paper 2
+            ->sum('marks');
 
-            return $paper2Marks > 0;
-        });
+        return $paper2Marks > 0;
+    });
 
-        // Calculate the average marks and assign grades for Paper 2 for each filtered student
-        $results = [];
+    // Calculate the average marks and assign grades for Paper 2 for each filtered student
+    $results = [];
 
-        foreach ($filteredStudents as $student) {
-            $paper2Marks = Mark::where('student_id', $student->id)
-                ->where('exam_id', $exam->id)
-                ->where('subject_id', 2)
-                ->sum('marks');
+    foreach ($filteredStudents as $student) {
+        $paper2Marks = Mark::where('student_id', $student->id)
+            ->where('exam_id', $exam->id)
+            ->where('subject_id', 2)
+            ->sum('marks');
 
-            // Retrieve the grading system for the exam
-            $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
+        // Retrieve the grading system for the exam
+        $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
 
-            // Determine the grade based on the grading system
-            $grade = $this->calculateGrade($paper2Marks, $gradingSystem);
+        // Determine the grade based on the grading system
+        $grade = $this->calculateGrade($paper2Marks, $gradingSystem);
 
-            // Store the student's result for Paper 2
-            $results[] = [
-                'student' => $student,
-                'paper2Marks' => $paper2Marks,
-                'grade' => $grade,
-            ];
-        }
-
-        // Sort the results by Paper 2 marks in descending order
-        usort($results, function ($a, $b) {
-            return $b['paper2Marks'] - $a['paper2Marks'];
-        });
-
-        // Calculate grade analysis for Paper 2
-        $analysis = [];
-
-        // Group students by stream for Paper 2
-        $studentsByStream = $filteredStudents->groupBy('stream.name');
-
-        foreach ($studentsByStream as $streamName => $streamStudents) {
-            $gradesCount = [];
-
-            // Retrieve the grading system from the database
-            $gradingSystem = Grading::all();
-
-            // Initialize the gradesCount array with zeros
-            foreach ($gradingSystem as $grade) {
-                $gradesCount[$grade->grade] = 0;
-            }
-
-            $totalStudents = $streamStudents->count();
-
-            // Calculate grades count for each grade for Paper 2
-            foreach ($streamStudents as $student) {
-                $studentResult = collect($results)->where('student.id', $student->id)->first();
-
-                if ($studentResult) {
-                    $studentGrade = $studentResult['grade'];
-                    $gradesCount[$studentGrade]++;
-                }
-            }
-
-            // Calculate mean for Paper 2
-            $mean = 0;
-            foreach ($gradesCount as $grade => $count) {
-                $gradePoints = $gradingSystem->where('grade', $grade)->first()->points ?? 0;
-                $mean += ($count * $gradePoints);
-            }
-            $mean = ($totalStudents > 0) ? round($mean / $totalStudents, 4) : 0;
-
-            // Add data to the analysis array for Paper 2
-            $analysis[] = [
-                'stream' => $streamName,
-                'grades' => $gradesCount,
-                'total' => $totalStudents,
-                'mean' => $mean,
-            ];
-        }
-
-        // Sort the analysis by mean in descending order
-        usort($analysis, function ($a, $b) {
-            return $b['mean'] - $a['mean'];
-        });
-
-        // Add the overall analysis row for Paper 2
-        $overallGradesCount = [];
-        foreach ($gradingSystem as $grade) {
-            $overallGradesCount[$grade->grade] = 0;
-        }
-
-        $overallTotalStudents = 0;
-
-        // Calculate overall grades count for Paper 2
-        foreach ($studentsByStream as $streamStudents) {
-            foreach ($streamStudents as $student) {
-                $studentResult = collect($results)->where('student.id', $student->id)->first();
-
-                if ($studentResult) {
-                    $studentGrade = $studentResult['grade'];
-                    $overallGradesCount[$studentGrade]++;
-                    $overallTotalStudents++;
-                }
-            }
-        }
-
-        // Calculate overall mean for Paper 2
-        $overallMean = 0;
-        foreach ($overallGradesCount as $grade => $count) {
-            $gradePoints = $gradingSystem->where('grade', $grade)->first()->points ?? 0;
-            $overallMean += ($count * $gradePoints);
-        }
-        $overallMean = ($overallTotalStudents > 0) ? round($overallMean / $overallTotalStudents, 4) : 0;
-
-        // Generate PDF
-        $pdf = PDF::loadView('backend.downloads.paper2', compact('exam', 'school', 'results', 'gradingSystem', 'analysis', 'overallGradesCount', 'overallTotalStudents', 'overallMean', 'form'));
-        $fileName = strtolower(str_replace(' ', '_', $exam->name . '_' . $exam->term . '_' . $exam->year) . '.pdf');
-
-        // Download the PDF file
-        return $pdf->download($fileName);
+        // Store the student's result for Paper 2
+        $results[] = [
+            'student' => $student,
+            'paper2Marks' => $paper2Marks,
+            'grade' => $grade,
+        ];
     }
+
+    // Sort the results by Paper 2 marks in descending order
+    usort($results, function ($a, $b) {
+        return $b['paper2Marks'] - $a['paper2Marks'];
+    });
+
+    // Calculate grade analysis for Paper 2
+    $analysis = [];
+
+    // Group students by stream for Paper 2
+    $studentsByStream = $filteredStudents->groupBy('stream.name');
+
+    foreach ($studentsByStream as $streamName => $streamStudents) {
+        // Retrieve the grading system for the exam
+        $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
+
+        $gradesCount = [];
+
+        // Initialize the gradesCount array with zeros
+        foreach ($gradingSystem as $grade) {
+            $gradesCount[$grade->grade] = 0;
+        }
+
+        $totalStudents = $streamStudents->count();
+
+        // Calculate grades count for each grade for Paper 2
+        foreach ($streamStudents as $student) {
+            $studentResult = collect($results)->where('student.id', $student->id)->first();
+
+            if ($studentResult) {
+                $studentGrade = $studentResult['grade'];
+                $gradesCount[$studentGrade]++;
+            }
+        }
+
+        // Calculate mean for Paper 2
+        $mean = 0;
+        foreach ($gradesCount as $grade => $count) {
+            $gradePoints = $gradingSystem->where('grade', $grade)->first()->points ?? 0;
+            $mean += ($count * $gradePoints);
+        }
+        $mean = ($totalStudents > 0) ? round($mean / $totalStudents, 4) : 0;
+
+        // Add data to the analysis array for Paper 2
+        $analysis[] = [
+            'stream' => $streamName,
+            'grades' => $gradesCount,
+            'total' => $totalStudents,
+            'mean' => $mean,
+        ];
+    }
+
+    // Sort the analysis by mean in descending order
+    usort($analysis, function ($a, $b) {
+        return $b['mean'] - $a['mean'];
+    });
+
+    // Add the overall analysis row for Paper 2
+    $overallGradesCount = [];
+    foreach ($gradingSystem as $grade) {
+        $overallGradesCount[$grade->grade] = 0;
+    }
+
+    $overallTotalStudents = 0;
+
+    // Calculate overall grades count for Paper 2
+    foreach ($studentsByStream as $streamStudents) {
+        foreach ($streamStudents as $student) {
+            $studentResult = collect($results)->where('student.id', $student->id)->first();
+
+            if ($studentResult) {
+                $studentGrade = $studentResult['grade'];
+                $overallGradesCount[$studentGrade]++;
+                $overallTotalStudents++;
+            }
+        }
+    }
+
+    // Calculate overall mean for Paper 2
+    $overallMean = 0;
+    foreach ($overallGradesCount as $grade => $count) {
+        $gradePoints = $gradingSystem->where('grade', $grade)->first()->points ?? 0;
+        $overallMean += ($count * $gradePoints);
+    }
+    $overallMean = ($overallTotalStudents > 0) ? round($overallMean / $overallTotalStudents, 4) : 0;
+
+    // Generate PDF
+    $pdf = PDF::loadView('backend.downloads.paper2', compact('exam', 'school', 'results', 'gradingSystem', 'analysis', 'overallGradesCount', 'overallTotalStudents', 'overallMean', 'form'));
+    $fileName = strtolower(str_replace(' ', '_', $exam->name . '_' . $exam->term . '_' . $exam->year) . '.pdf');
+
+    return $pdf->download($fileName);
+}
+
+
+
+
 
 
 }

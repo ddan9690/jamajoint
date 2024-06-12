@@ -30,8 +30,6 @@ class PaperAnalysisController extends Controller
         // Retrieve the form associated with the exam
         $form = $exam->form;
 
-
-
         // Get the authenticated user's school
         $school = Auth::user()->school;
 
@@ -316,6 +314,5 @@ class PaperAnalysisController extends Controller
         // Load the view with the results, gradingSystem, and analysis for Paper 2
         return view('backend.results.paper2.myschoolResult', compact('exam', 'school', 'results', 'gradingSystem', 'analysis', 'overallGradesCount', 'overallTotalStudents', 'overallMean', 'form'));
     }
-
 
 }

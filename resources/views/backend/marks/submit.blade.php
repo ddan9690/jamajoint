@@ -20,7 +20,6 @@
                 <p>Subject: {{ $subject->name }}</p>
             </div>
         </div>
-        {{-- <p style="color: green;">Integrity,Honesty,Proffessionalism is key!</p> --}}
 
         <div class="row">
             <div class="col-md-12">
@@ -36,19 +35,19 @@
                         </thead>
                         <tbody>
                             @foreach ($students as $student)
-                                    @if (!empty($student->marks))
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $student->adm }}</td>
-                                            <td>{{ $student->name }}</td>
-                                            <td>
-                                                <input type="number" name="marks[{{ $student->id }}]" min="0"
-                                                    max="100" class="form-control marks-input">
-                                                <input type="hidden" name="student_ids[]" value="{{ $student->id }}">
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
+                                @if (!empty($student->marks))
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $student->adm }}</td>
+                                        <td>{{ $student->name }}</td>
+                                        <td>
+                                            <input type="number" name="marks[{{ $student->id }}]" min="0"
+                                                max="100" class="form-control marks-input">
+                                            <input type="hidden" name="student_ids[]" value="{{ $student->id }}">
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -57,6 +56,7 @@
 
         <div class="row">
             <div class="col-md-12 text-right">
+                <p class="text-muted small">* If a student is missing from this list, submit the already entered marks and contact admin to add the student to the correct school and stream. You can then use the add result link later.</p>
                 <button type="button" id="submit-marks" class="btn btn-sm btn-primary">Submit Marks</button>
             </div>
         </div>
@@ -116,4 +116,3 @@
     });
 </script>
 @endpush
-

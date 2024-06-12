@@ -248,6 +248,7 @@ Route::middleware(['auth', 'admin'])->prefix('manage')->group(function () {
     Route::put('/exams/{id}/{slug}', [ExamController::class, 'update'])->name('exams.update');
     Route::patch('/exams/updateStatus/{id}', [ExamController::class, 'updateStatus'])->name('exams.updatePublished');
     Route::delete('/exams/{id}', [ExamController::class, 'destroy'])->name('exams.destroy');
+    Route::patch('/exams/updateGradingSystem/{id}', [ExamController::class, 'updateGradingSystem'])->name('exams.updateGradingSystem');
 
     // register schools for an exam
     // Route::get('/exams/{id}/register', [ExamController::class, 'registerSchools'])->name('exams.register');

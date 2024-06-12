@@ -32,51 +32,67 @@
             @if($exams->isEmpty())
                 <p>No exam to manage.</p>
             @else
-                <table class="table table-sm align-items-center table-flush" id="dataTable">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Status</th>
-                            @can('super')
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            @endcan
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($exams as $index => $exam)
-                            @can('view-manage-exam', $exam)
-                                <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td><a href="{{ route('exams.show', ['id' => $exam->id, 'slug' => $exam->slug]) }}">{{ $exam->name }} Form {{ $exam->form->name }} Term {{ $exam->term }} {{ $exam->year }}</a></td>
-                                    <td>
-                                        <form action="{{ route('exams.updatePublished', ['id' => $exam->id]) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <select name="published" class="form-control form-control-sm" onchange="this.form.submit()">
-                                                <option value="yes" {{ $exam->published === 'yes' ? 'selected' : '' }}>Published</option>
-                                                <option value="no" {{ $exam->published === 'no' ? 'selected' : '' }}>Unpublished</option>
-                                            </select>
-                                        </form>
-                                    </td>
-                                    @can('super')
-                                        <td>
-                                            <a href="{{ route('exams.edit', ['id' => $exam->id, 'slug' => $exam->slug]) }}" class="text-success">Edit</a>
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('exams.destroy', ['id' => $exam->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this exam?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                            </form>
-                                        </td>
-                                    @endcan
-                                </tr>
-                            @endcan
-                        @endforeach
-                    </tbody>
-                </table>
+            <table class="table table-sm align-items-center table-flush" id="dataTable">
+                <thead class="thead-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Grading System</th>
+                        @can('super')
+                        <th>Actions</th>
+                        @endcan
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($exams as $index => $exam)
+                    @can('view-exam', $exam)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td><a href="{{ route('exams.show', ['id' => $exam->id, 'slug' => $exam->slug]) }}">{{ $exam->name }} Form {{ $exam->form->name }} Term {{ $exam->term }} {{ $exam->year }}</a></td>
+                        <td>
+                            <form action="{{ route('exams.updatePublished', ['id' => $exam->id]) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <select name="published" class="form-control form-control-sm" onchange="this.form.submit()">
+                                    <option value="yes" {{ $exam->published === 'yes' ? 'selected' : '' }}>Published</option>
+                                    <option value="no" {{ $exam->published === 'no' ? 'selected' : '' }}>Unpublished</option>
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            <!-- Grading system update form -->
+                            <form action="{{ route('exams.updateGradingSystem', ['id' => $exam->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to change the grading system for this exam?');">
+                                @csrf
+                                @method('PATCH')
+                                <select name="grading_system_id" class="form-control form-control-sm" onchange="this.form.submit()">
+                                    @foreach ($gradingSystems as $gradingSystem)
+                                    <option value="{{ $gradingSystem->id }}" {{ $exam->grading_system_id == $gradingSystem->id ? 'selected' : '' }}>{{ $gradingSystem->name }}</option>
+                                    @endforeach
+                                </select>
+                            </form>
+                        </td>
+                        @can('super')
+                        <td>
+                            <div style="display: flex; align-items: center;">
+                                <a href="{{ route('exams.edit', ['id' => $exam->id, 'slug' => $exam->slug]) }}" class="text-success"><i class="fas fa-edit"></i></a>
+                                <form action="{{ route('exams.destroy', ['id' => $exam->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this exam?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" style="margin-left: 5px;"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                        </td>
+
+                        @endcan
+                    </tr>
+                    @endcan
+                    @endforeach
+                </tbody>
+            </table>
+
+
+
             @endif
         </div>
     </div>

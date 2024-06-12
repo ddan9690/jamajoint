@@ -152,4 +152,19 @@ class ExamController extends Controller
 
         return redirect()->route('exams.index')->with('success', 'Published status updated successfully.');
     }
+
+    public function updateGradingSystem(Request $request, $id)
+{
+    $exam = Exam::findOrFail($id);
+
+    $validatedData = $request->validate([
+        'grading_system_id' => 'required|exists:grading_systems,id',
+    ]);
+
+    // Update the grading system for the exam
+    $exam->update(['grading_system_id' => $validatedData['grading_system_id']]);
+
+    return redirect()->route('exams.index')->with('success', 'Grading system updated successfully.');
+}
+
 }

@@ -83,5 +83,10 @@
                 </div>
             </div>
         </div>
+
+        {{-- Display the alert message about challenges in downloading student ranking data --}}
+        <div class="alert alert-success" role="alert">
+            <strong>Notice:</strong> We are currently experiencing challenges with downloading the overall student ranking data. Our team is actively working to resolve this issue as soon as possible. We appreciate your patience and understanding. Thank you for choosing JamaJoint.
+        </div>
     </div>
 @endsection

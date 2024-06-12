@@ -16,24 +16,24 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    {{-- <th>ID</th> --}}
                                     <th>Name</th>
-                                    <th>Actions</th>
+                                    {{-- <th>Actions</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($gradingSystems as $gradingSystem)
                                     <tr>
-                                        <td>{{ $gradingSystem->id }}</td>
+                                        {{-- <td>{{ $gradingSystem->id }}</td> --}}
                                         <td>{{ $gradingSystem->name }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <a href="{{ route('grading_system.edit', $gradingSystem->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                             <form action="{{ route('grading_system.destroy', $gradingSystem->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this grading system?')">Delete</button>
                                             </form>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

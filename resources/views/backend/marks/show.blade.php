@@ -27,17 +27,21 @@
     @endif
 
     <div class="row">
-        <div class="col-md-12 text-right mb-3">
+        <div class="col-md-12 mb-1">
             @can('admin')
 
-            <a href="{{ route('marks.deleteAll', [$exam->id, $stream->id, $subject->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete all records?');">
-                <i class="fa-solid fa-trash"></i> Delete All
-            </a>
+            <p>
+                <a href="{{ route('marks.deleteAll', [$exam->id, $stream->id, $subject->id]) }}" style="color: red;" onclick="return confirm('Are you sure you want to delete all records?');">
+                    Delete all entered marks for this stream for this exam and start afresh.
+                </a>
+            </p>
             @endcan
 
-            <a href="{{ route('marks.addResult', [$exam->id, $stream->id, $subject->id]) }}" class="btn btn-success btn-sm">
-                <i class="fa-solid fa-plus"></i> Add Result
-            </a>
+            <p>
+                <a href="{{ route('marks.addResult', [$exam->id, $stream->id, $subject->id]) }}" style="color: green;">
+                    Add marks for students not yet entered for this stream.
+                </a>
+            </p>
         </div>
     </div>
 

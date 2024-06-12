@@ -87,13 +87,14 @@ class ExamController extends Controller
     {
         $exam = Exam::findOrFail($id);
         $forms = Form::all(); // Retrieve all forms
+        $gradingSystems = GradingSystem::orderBy('name')->get();
 
         // You can check if the provided slug matches the actual slug
         if ($exam->slug !== $slug) {
             return redirect()->route('exams.edit', ['id' => $id, 'slug' => $exam->slug]);
         }
 
-        return view('backend.exams.edit', compact('exam', 'forms'));
+        return view('backend.exams.edit', compact('exam', 'forms', 'gradingSystems'));
     }
 
     /**
@@ -107,8 +108,9 @@ class ExamController extends Controller
             'name' => 'required|string|max:255',
             'term' => 'required|integer|in:1,2,3',
             'year' => 'required|integer',
-            'published' => 'required|in:no,yes', // Add validation for "published"
-            'form_id' => 'required|exists:forms,id', // Add validation for "form_id"
+            'published' => 'required|in:no,yes',
+            'form_id' => 'required|exists:forms,id',
+            'grading_system_id' => 'required|exists:grading_systems,id', // Add validation for "grading_system_id"
         ]);
 
         $slug = Str::slug($validatedData['name']);
@@ -119,11 +121,13 @@ class ExamController extends Controller
             'term' => $validatedData['term'],
             'year' => $validatedData['year'],
             'published' => $validatedData['published'],
-            'form_id' => $validatedData['form_id'], // Update the "form_id" field
+            'form_id' => $validatedData['form_id'],
+            'grading_system_id' => $validatedData['grading_system_id'], // Update the "grading_system_id" field
         ]);
 
         return redirect()->route('exams.index')->with('success', 'Exam updated successfully.');
     }
+
 
     public function destroy($id)
     {

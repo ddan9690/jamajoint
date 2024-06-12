@@ -53,18 +53,23 @@ class ExcelDownloadController extends Controller
 
                 // Store the student's result including subject-wise marks
                 $studentMeans[] = [
-                    'student' => $student,
-                    'subject1Marks' => $subject1Marks,
-                    'subject2Marks' => $subject2Marks,
-                    'average' => $average,
-                    'grade' => $grade,
+                    'ADM' => $student->adm,
+                    'NAME' => $student->name,
+                    'GENDER' => $student->gender,
+                    'SCHOOL' => $student->school->name,
+                    'STRM' => $student->stream->name,
+                    'PP1' => $subject1Marks,
+                    'PP2' => $subject2Marks,
+                    'AVG' => $average,
+                    'GRD' => $grade,
+                    'RNK' => null, // We'll calculate rank later
                 ];
             }
         }
 
         // Sort the students by average in descending order
         usort($studentMeans, function ($a, $b) {
-            return $b['average'] - $a['average'];
+            return $b['AVG'] - $a['AVG'];
         });
 
         // Initialize rank
@@ -72,16 +77,24 @@ class ExcelDownloadController extends Controller
 
         // Calculate the rank while considering students with the same average marks
         foreach ($studentMeans as $key => $studentMean) {
-            if ($key > 0 && $studentMean['average'] != $studentMeans[$key - 1]['average']) {
+            if ($key > 0 && $studentMean['AVG'] != $studentMeans[$key - 1]['AVG']) {
                 $rank = $key + 1;
             }
-            $studentMeans[$key]['rank'] = $rank;
+            $studentMeans[$key]['RNK'] = $rank;
         }
 
         // Generate Excel file
         $filename = $exam->name . '_Overall_Student_Ranking.xlsx';
-        return Excel::download(new OverallStudentRankingExport($studentMeans, $gradingSystem), $filename);
+        return Excel::download(new OverallStudentRankingExport($studentMeans, [
+            'name' => $exam->name,
+            'term' => $exam->term,
+            'year' => $exam->year
+        ]), $filename);
     }
+
+
+
+
 
     public function streamRanking($id, $slug)
     {

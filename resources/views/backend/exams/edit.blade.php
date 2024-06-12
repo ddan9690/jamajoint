@@ -20,10 +20,10 @@
 
                         <div class="form-group">
                             <label for="term">Form</label>
-                            <select name="term" class="form-control" id="term" required>
-                                <option value="3" {{ $exam->form->name == 3 ? 'selected' : '' }}>Form 3</option>
-                                <option value="4" {{ $exam->form->name == 4 ? 'selected' : '' }}>Form 4</option>
-
+                            <select name="form_id" class="form-control" id="form_id" required>
+                                @foreach ($forms as $form)
+                                    <option value="{{ $form->id }}" {{ $exam->form_id == $form->id ? 'selected' : '' }}>Form {{ $form->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -49,6 +49,15 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label for="grading_system_id">Grading System</label>
+                            <select name="grading_system_id" class="form-control" id="grading_system_id" required>
+                                @foreach ($gradingSystems as $gradingSystem)
+                                    <option value="{{ $gradingSystem->id }}" {{ $exam->grading_system_id == $gradingSystem->id ? 'selected' : '' }}>{{ $gradingSystem->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <button type="submit" class="btn btn-sm btn-primary">Update Exam</button>
                     </form>
                 </div>
@@ -57,4 +66,3 @@
     </div>
 </div>
 @endsection
-

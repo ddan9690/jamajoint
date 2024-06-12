@@ -122,7 +122,11 @@
     <script>
         $(document).ready(function () {
             // DataTable for Paper 2 results
-            $('#paper2-results-table').DataTable();
+            $('#paper2-results-table').DataTable(
+                {
+            "pageLength": 50
+        }
+            );
         });
     </script>
 @endpush

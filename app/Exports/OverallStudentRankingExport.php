@@ -2,33 +2,44 @@
 
 namespace App\Exports;
 
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithCustomStartCell;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
-class OverallStudentRankingExport implements FromCollection, WithHeadings, ShouldAutoSize, WithCustomStartCell, WithStyles
+class OverallStudentRankingExport implements FromCollection, WithHeadings, WithMapping
 {
     protected $data;
-    protected $examDetails;
 
-    public function __construct(array $data, array $examDetails)
+    public function __construct(array $data)
     {
-        $this->data = collect($data);
-        $this->examDetails = $examDetails;
+        $this->data = $data;
     }
 
     public function collection()
     {
-        return $this->data;
+        return collect($this->data);
+    }
+
+    public function map($studentMean): array
+    {
+        return [
+            $studentMean['rank'],
+            $studentMean['student']->adm,
+            $studentMean['student']->name,
+            $studentMean['student']->gender,
+            $studentMean['student']->school->name,
+            $studentMean['student']->stream->name,
+            $studentMean['subject1Marks'],
+            $studentMean['subject2Marks'],
+            $studentMean['average'],
+            $studentMean['grade'],
+        ];
     }
 
     public function headings(): array
     {
         return [
+            '#',
             'ADM',
             'NAME',
             'GENDER',
@@ -38,29 +49,6 @@ class OverallStudentRankingExport implements FromCollection, WithHeadings, Shoul
             'PP2',
             'AVG',
             'GRD',
-            'RNK',
         ];
-    }
-
-    public function startCell(): string
-    {
-        return 'A2';
-    }
-
-    public function styles(Worksheet $sheet)
-    {
-        // Merge cells for the overall heading
-        $sheet->mergeCells('A1:J1');
-
-        // Set the overall heading text including the exam name and year
-        $overallHeading = $this->examDetails['name'] . ' - Term ' . $this->examDetails['term']  . ' ' . $this->examDetails['year'];
-        $sheet->setCellValue('A1', $overallHeading);
-
-        // Set font size, bold, and center align the overall heading
-        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-        $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
-
-        // Set font size and bold for headings
-        $sheet->getStyle('A2:J2')->getFont()->setBold(true)->setSize(12);
     }
 }

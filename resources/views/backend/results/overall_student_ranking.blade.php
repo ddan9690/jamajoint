@@ -15,9 +15,25 @@
     <div class="row">
         <div class="col-md-12">
             <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- Heading displaying exam and ranking information -->
                 <h5>{{ $exam->name }} Form {{ $exam->form->name }} Term {{ $exam->term }} {{ $exam->year }} - Overall Student Ranking</h5>
-                <a href="{{ route('excel.overall-student-ranking', ['id' => $exam->id, 'slug' => $exam->slug, 'form_id' => $exam->form_id]) }}" class="btn btn-sm btn-success">Download</a>
+
+                <!-- Button group for download options -->
+                <div class="btn-group">
+                    <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Download
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="{{ route('pdf.overall-student-ranking', ['id' => $exam->id, 'slug' => $exam->slug, 'form_id' => $exam->form_id]) }}" class="dropdown-item">
+                            <i class="fas fa-file-pdf fa-fw"></i> Overall Student Ranking (PDF)
+                        </a>
+                        <a href="{{ route('excel.overall-student-ranking', ['id' => $exam->id, 'slug' => $exam->slug, 'form_id' => $exam->form_id]) }}" class="dropdown-item">
+                            <i class="fas fa-file-excel fa-fw"></i> Overall Student Ranking (Excel)
+                        </a>
+                    </div>
+                </div>
             </div>
+
 
             <!-- Main Results Table -->
             <table id="results-table" class="table table-responsive table-sm align-items-center table-flush table-bordered table-striped">

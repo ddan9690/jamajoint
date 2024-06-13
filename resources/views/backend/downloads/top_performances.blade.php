@@ -9,25 +9,27 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            font-size: 12px; /* Reduced font size */
         }
 
         /* Landscape orientation */
         @page {
             size: landscape;
+            margin: 20px;
         }
 
         /* Container styles */
         .container {
             max-width: 100%;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 10px auto; /* Reduced margin */
+            padding: 10px; /* Reduced padding */
             text-align: center;
         }
 
         /* Logo styles */
         .logo {
             max-width: 150px;
-            margin: 0 auto 10px;
+            margin: 0 auto 5px; /* Reduced bottom margin */
             display: block;
         }
 
@@ -35,7 +37,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* Reduced bottom margin */
         }
 
         table, th, td {
@@ -58,11 +60,14 @@
             text-transform: uppercase;
             font-weight: bold;
             text-align: center;
+            margin-bottom: 10px; /* Reduced bottom margin */
         }
 
-        /* Additional styles for h6 headings and positioning "#" column */
+        /* Additional styles for h6 headings */
         h6 {
-            margin-top: 5px;
+            margin: 5px 0; /* Reduced top and bottom margin */
+            font-size: 14px; /* Reduced font size */
+            font-weight: bold;
         }
 
         .mt-2 {
@@ -73,17 +78,15 @@
 <body>
     <div class="container">
         @if ($exam->form->name == '3')
-            <img src="{{ public_path('backend/img/logo/cyberspace-national-joint-logo.png') }}" alt="Logo"
-                class="logo">
+            <img src="{{ public_path('backend/img/logo/cyberspace-national-joint-logo.png') }}" alt="Logo" class="logo">
         @endif
         <div class="exam-details">
             {{ $exam->name }} Term {{ $exam->term }} {{ $exam->year }} - Top Performers
         </div>
 
         <!-- Top Performers - Boys -->
-        <h6 class="mt-2" style="font-size: 16px; font-weight: bold;">Top 10 Boys</h6>
+        <h6 class="mt-2">Top 10 Boys</h6>
         <table>
-            <!-- Insert your table content for boys here -->
             <thead>
                 <tr>
                     <th>Name</th>
@@ -94,14 +97,13 @@
                     <th>PP2</th>
                     <th>AVG</th>
                     <th>GRD</th>
-                    <th>POS</th> <!-- Move "#" column to be the last -->
+                    <th>POS</th>
                 </tr>
             </thead>
             <tbody>
                 @php $currentRank = 1; @endphp
                 @foreach ($topBoys as $index => $result)
                     @php
-                        // Check if it's a new rank or tie
                         $isNewRank = ($index === 0 || $result['average'] !== $topBoys[$index - 1]['average']);
                         if ($isNewRank) {
                             $currentRank = $index + 1;
@@ -116,16 +118,15 @@
                         <td>{{ strtoupper($result['subject2Marks']) }}</td>
                         <td>{{ strtoupper($result['average']) }}</td>
                         <td>{{ strtoupper($result['grade']) }}</td>
-                        <td>{{ $currentRank }}</td> <!-- Move "#" to the last position -->
+                        <td>{{ $currentRank }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
         <!-- Top Performers - Girls -->
-        <h6 class="mt-2" style="font-size: 16px; font-weight: bold;">Top 10 Girls</h6>
+        <h6 class="mt-2">Top 10 Girls</h6>
         <table>
-            <!-- Insert your table content for girls here -->
             <thead>
                 <tr>
                     <th>Name</th>
@@ -136,14 +137,13 @@
                     <th>PP2</th>
                     <th>AVG</th>
                     <th>GRD</th>
-                    <th>POS</th> <!-- Move "#" column to be the last -->
+                    <th>POS</th>
                 </tr>
             </thead>
             <tbody>
                 @php $currentRank = 1; @endphp
                 @foreach ($topGirls as $index => $result)
                     @php
-                        // Check if it's a new rank or tie
                         $isNewRank = ($index === 0 || $result['average'] !== $topGirls[$index - 1]['average']);
                         if ($isNewRank) {
                             $currentRank = $index + 1;
@@ -158,7 +158,7 @@
                         <td>{{ strtoupper($result['subject2Marks']) }}</td>
                         <td>{{ strtoupper($result['average']) }}</td>
                         <td>{{ strtoupper($result['grade']) }}</td>
-                        <td>{{ $currentRank }}</td> <!-- Move "#" to the last position -->
+                        <td>{{ $currentRank }}</td>
                     </tr>
                 @endforeach
             </tbody>

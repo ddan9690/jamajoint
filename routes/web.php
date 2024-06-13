@@ -21,6 +21,8 @@ use App\Http\Controllers\PdfDownloadController;
 use App\Http\Controllers\ExcelDownloadController;
 use App\Http\Controllers\GradingSystemController;
 use App\Http\Controllers\PaperAnalysisController;
+use App\Http\Controllers\OverallRankingController;
+use App\Http\Controllers\OverallRankingExcelController;
 
 
 
@@ -189,6 +191,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/download-pdf/{id}/{slug}', [PdfDownloadController::class, 'overallStudentRanking'])
         ->name('pdf-download.overall-student-ranking');
+
+        // newly added overall ranking cotnrolle logic
+        Route::get('/download-pdf-overall-ranking/{id}/{slug}/{form_id}', [OverallRankingController::class, 'downloadOverallRankingPdf'])
+        ->name('pdf.overall-student-ranking');
+
+
+        Route::get('/download-excel-overall-ranking/{id}/{slug}/{form_id}', [OverallRankingExcelController::class, 'downloadOverallRankingExcel'])
+            ->name('excel.overall-student-ranking');
 
 
 

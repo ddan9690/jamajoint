@@ -2,53 +2,51 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use App\Models\Exam;
+use App\Models\Grading;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
 class OverallStudentRankingExport implements FromCollection, WithHeadings, WithMapping
 {
-    protected $data;
+    protected $exam;
+    protected $gradingSystem;
+    protected $studentMeans;
 
-    public function __construct(array $data)
+    public function __construct(Exam $exam, $gradingSystem, $studentMeans)
     {
-        $this->data = $data;
+        $this->exam = $exam;
+        $this->gradingSystem = $gradingSystem;
+        $this->studentMeans = $studentMeans;
     }
 
     public function collection()
     {
-        return collect($this->data);
-    }
-
-    public function map($studentMean): array
-    {
-        return [
-            $studentMean['rank'],
-            $studentMean['student']->adm,
-            $studentMean['student']->name,
-            $studentMean['student']->gender,
-            $studentMean['student']->school->name,
-            $studentMean['student']->stream->name,
-            $studentMean['subject1Marks'],
-            $studentMean['subject2Marks'],
-            $studentMean['average'],
-            $studentMean['grade'],
-        ];
+        return collect($this->studentMeans);
     }
 
     public function headings(): array
     {
         return [
-            '#',
-            'ADM',
-            'NAME',
-            'GENDER',
-            'SCHOOL',
-            'STRM',
-            'PP1',
-            'PP2',
-            'AVG',
-            'GRD',
+            '#', 'ADM', 'NAME', 'GENDER', 'SCHOOL', 'STRM', 'PP1', 'PP2', 'AVG', 'GRD', 'RNK'
+        ];
+    }
+
+    public function map($result): array
+    {
+        return [
+            $result['rank'],
+            $result['student']->adm,
+            $result['student']->name,
+            $result['student']->gender,
+            $result['student']->school->name,
+            $result['student']->stream->name,
+            $result['subject1Marks'],
+            $result['subject2Marks'],
+            $result['average'],
+            $result['grade'],
+            $result['rank'] // Ensure this matches your intended output
         ];
     }
 }

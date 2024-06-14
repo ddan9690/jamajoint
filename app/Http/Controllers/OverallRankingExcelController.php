@@ -1,31 +1,34 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Exports\OverallStudentRankingExport;
+use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\Grading;
 use App\Models\Mark;
 use App\Models\Student;
+use App\Exports\OverallStudentRankingExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-class OverallRankingExcelController extends Controller
+class OverallRankingController extends Controller
 {
-    public function downloadOverallRankingExcel($id, $slug, $form_id)
+    // Controller method for exporting overall student ranking to Excel
+    public function exportToExcel($id, $slug, $form_id)
     {
-        // Retrieve the exam
+        // Retrieve the exam (similar to your existing method)
         $exam = Exam::findOrFail($id);
+
 
         // Retrieve the grading system associated with the exam
         $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
 
-        // Retrieve all students from the specified form
+        // Retrieve all students from the specified form (similar to your existing method)
         $students = Student::where('form_id', $form_id)->get();
 
         // Initialize an array to store student mean results
         $studentMeans = [];
 
-        // Calculate the mean for each student
+        // Calculate the mean for each student (similar to your existing method)
         foreach ($students as $student) {
             // Filter students to include only those with marks in both subjects for the specified exam
             $subject1Marks = Mark::where('student_id', $student->id)
@@ -57,15 +60,15 @@ class OverallRankingExcelController extends Controller
             }
         }
 
-        // Sort the students by average in descending order
+        // Sort the students by average in descending order (similar to your existing method)
         usort($studentMeans, function ($a, $b) {
             return $b['average'] - $a['average'];
         });
 
-        // Initialize rank
+        // Initialize rank (similar to your existing method)
         $rank = 1;
 
-        // Calculate the rank while considering students with the same average marks
+        // Calculate the rank while considering students with the same average marks (similar to your existing method)
         foreach ($studentMeans as $key => $studentMean) {
             if ($key > 0 && $studentMean['average'] != $studentMeans[$key - 1]['average']) {
                 $rank = $key + 1;
@@ -73,18 +76,8 @@ class OverallRankingExcelController extends Controller
             $studentMeans[$key]['rank'] = $rank;
         }
 
-        // Prepare data for export (include exam details if needed)
-        $exportData = [
-            'exam' => $exam,
-            'studentMeans' => $studentMeans,
-            'gradingSystem' => $gradingSystem,
-        ];
-
-        // Create a custom filename for the Excel
-        $filename = str_replace(' ', '_', $exam->name) . '_Form_' . $form_id . '_Overall_Student_Ranking.xlsx';
-
-        // Generate Excel file using the export class
-        return Excel::download(new OverallStudentRankingExport($exportData), $filename);
+        // Export to Excel using OverallStudentRankingExport class
+        return Excel::download(new OverallStudentRankingExport($exam, $studentMeans, $gradingSystem), 'overall_student_ranking.xlsx');
     }
 
     // Helper method to calculate the grade based on the average and grading system

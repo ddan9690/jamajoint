@@ -6,7 +6,6 @@
         {{ $exam->name }} - Overall Student Ranking PDF
     </title>
     <style>
-        /* Include styles from the Paper 1 template for consistent design */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -104,8 +103,8 @@
                     <td>{{ $result['student']->gender }}</td>
                     <td>{{ $result['student']->school->name }}</td>
                     <td>{{ $result['student']->stream->name }}</td>
-                    <td>{{ $result['subject1Marks'] }}</td>
-                    <td>{{ $result['subject2Marks'] }}</td>
+                    <td>{{ $result['subjectMarks'][1] }}</td>
+                    <td>{{ $result['subjectMarks'][2] }}</td>
                     <td>{{ $result['average'] }}</td>
                     <td>{{ $result['grade'] }}</td>
                     <td>{{ $result['rank'] }}</td>

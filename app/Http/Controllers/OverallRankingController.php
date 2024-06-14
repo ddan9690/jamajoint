@@ -4,92 +4,84 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use App\Models\Mark;
-use App\Models\School;
 use App\Models\Grading;
 use App\Models\Student;
 use Barryvdh\DomPDF\Facade\Pdf;
-
 use Illuminate\Http\Request;
 
 class OverallRankingController extends Controller
 {
     public function downloadOverallRankingPdf($id, $slug, $form_id)
     {
-        // Retrieve the exam
+        ini_set('memory_limit', '512M');
+        ini_set('max_execution_time', '300');
+
         $exam = Exam::findOrFail($id);
-
-        // Retrieve the grading system associated with the exam
         $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
-
-        // Retrieve all students from the specified form
-        $students = Student::where('form_id', $form_id)->get();
-
-        // Initialize an array to store student mean results
         $studentMeans = [];
 
-        // Calculate the mean for each student
-        foreach ($students as $student) {
-            // Filter students to include only those with marks in both subjects for the specified exam
-            $subject1Marks = Mark::where('student_id', $student->id)
-                ->where('exam_id', $exam->id)
-                ->where('subject_id', 1)
-                ->sum('marks');
+        Student::where('form_id', $form_id)->chunk(100, function ($studentsChunk) use ($exam, $gradingSystem, &$studentMeans) {
+            foreach ($studentsChunk as $student) {
+                $subjectMarks = $this->getSubjectMarks($student->id, $exam->id);
 
-            $subject2Marks = Mark::where('student_id', $student->id)
-                ->where('exam_id', $exam->id)
-                ->where('subject_id', 2)
-                ->sum('marks');
+                if ($this->hasMarksInAllSubjects($subjectMarks)) {
+                    $average = $this->calculateAverage($subjectMarks);
+                    $grade = $this->calculateGrade($average, $gradingSystem);
 
-            // Check if both subject marks are greater than 0
-            if ($subject1Marks > 0 && $subject2Marks > 0) {
-                // Calculate the average
-                $average = round(($subject1Marks + $subject2Marks) / 2);
-
-                // Determine the grade based on the grading system
-                $grade = $this->calculateGrade($average, $gradingSystem);
-
-                // Store the student's result including subject-wise marks
-                $studentMeans[] = [
-                    'student' => $student,
-                    'subject1Marks' => $subject1Marks,
-                    'subject2Marks' => $subject2Marks,
-                    'average' => $average,
-                    'grade' => $grade,
-                ];
+                    $studentMeans[] = [
+                        'student' => $student,
+                        'subjectMarks' => $subjectMarks,
+                        'average' => $average,
+                        'grade' => $grade,
+                    ];
+                }
             }
-        }
-
-        // Sort the students by average in descending order
-        usort($studentMeans, function ($a, $b) {
-            return $b['average'] - $a['average'];
         });
 
-        // Initialize rank
-        $rank = 1;
+        $studentMeans = $this->rankStudents($studentMeans);
 
-        // Calculate the rank while considering students with the same average marks
-        foreach ($studentMeans as $key => $studentMean) {
-            if ($key > 0 && $studentMean['average'] != $studentMeans[$key - 1]['average']) {
-                $rank = $key + 1;
-            }
-            $studentMeans[$key]['rank'] = $rank;
-        }
-
-        // Generate the PDF view for overall student ranking
-        $pdf = PDF::loadView('backend.downloads.overall_ranking', [
+        $pdf = Pdf::loadView('backend.downloads.overall_ranking', [
             'exam' => $exam,
             'studentMeans' => $studentMeans,
             'gradingSystem' => $gradingSystem,
+            'subjectNames' => ['PP1', 'PP2'], // Replace with dynamic subjects if needed
         ]);
 
-        // Create a custom filename for the PDF
-        $filename = str_replace(' ', '_', $exam->name) . '_Form_' . $form_id . '_Overall_Student_Ranking.pdf';
+        $filename = $this->generateFilename($exam, $form_id);
 
-        // Download the PDF with the custom filename
         return $pdf->download($filename);
     }
 
-    // Helper method to calculate the grade based on the average and grading system
+    private function getSubjectMarks($studentId, $examId)
+    {
+        $subjectIds = [1, 2]; // Replace with dynamic subject IDs if needed
+        $subjectMarks = [];
+
+        foreach ($subjectIds as $subjectId) {
+            $subjectMarks[$subjectId] = Mark::where('student_id', $studentId)
+                ->where('exam_id', $examId)
+                ->where('subject_id', $subjectId)
+                ->sum('marks');
+        }
+
+        return $subjectMarks;
+    }
+
+    private function hasMarksInAllSubjects($subjectMarks)
+    {
+        foreach ($subjectMarks as $marks) {
+            if ($marks <= 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private function calculateAverage($subjectMarks)
+    {
+        return round(array_sum($subjectMarks) / count($subjectMarks));
+    }
+
     private function calculateGrade($average, $gradingSystem)
     {
         foreach ($gradingSystem as $grade) {
@@ -100,5 +92,25 @@ class OverallRankingController extends Controller
         return 'N/A'; // If grade not found
     }
 
+    private function rankStudents($studentMeans)
+    {
+        usort($studentMeans, function ($a, $b) {
+            return $b['average'] - $a['average'];
+        });
 
+        $rank = 1;
+        foreach ($studentMeans as $key => $studentMean) {
+            if ($key > 0 && $studentMean['average'] != $studentMeans[$key - 1]['average']) {
+                $rank = $key + 1;
+            }
+            $studentMeans[$key]['rank'] = $rank;
+        }
+
+        return $studentMeans;
+    }
+
+    private function generateFilename($exam, $formId)
+    {
+        return str_replace(' ', '_', $exam->name) . '_Form_' . $formId . '_Overall_Student_Ranking.pdf';
+    }
 }

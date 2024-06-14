@@ -6,6 +6,7 @@
         {{ $exam->name }} - Overall Student Ranking PDF
     </title>
     <style>
+        /* Include styles from the Paper 1 template for consistent design */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -25,28 +26,29 @@
             margin: 0 auto;
             margin-bottom: 10px;
             font-family: Arial, sans-serif;
-            font-size: 10px;
+            font-size: 10px; /* Set the font size */
             text-align: left;
         }
 
-        .table th,
-        .table td {
+        .table,
+        th,
+        td {
             border: 1px solid #000;
-            padding: 4px;
+            padding: 4px; /* Set the padding */
         }
 
-        .table th {
+        th,
+        td {
+            white-space: nowrap;
+        }
+
+        th {
             background-color: #f2f2f2;
             font-weight: bold;
         }
 
         tr:nth-child(even) {
             background-color: #f2f2f2;
-        }
-
-        .table th:nth-child(4),
-        .table td:nth-child(4) {
-            width: 40px; /* Adjust the width as needed */
         }
 
         .overall-row {
@@ -67,9 +69,9 @@
             font-weight: bold;
             text-align: center;
             font-family: Arial, sans-serif;
-            font-size: 16px;
+            font-size: 16px; /* Set the font size */
             text-decoration: underline;
-            margin-bottom: 5px;
+            margin-bottom: 5px; /* Adjust spacing between exam details and table */
         }
     </style>
 </head>
@@ -103,8 +105,8 @@
                     <td>{{ $result['student']->gender }}</td>
                     <td>{{ $result['student']->school->name }}</td>
                     <td>{{ $result['student']->stream->name }}</td>
-                    <td>{{ $result['subjectMarks'][1] }}</td>
-                    <td>{{ $result['subjectMarks'][2] }}</td>
+                    <td>{{ $result['subject1Marks'] }}</td>
+                    <td>{{ $result['subject2Marks'] }}</td>
                     <td>{{ $result['average'] }}</td>
                     <td>{{ $result['grade'] }}</td>
                     <td>{{ $result['rank'] }}</td>

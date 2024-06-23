@@ -20,25 +20,19 @@
 
         .main-heading {
             font-weight: bold;
-            font-size: 24px;
-            background-color: #f2f2f2;
-            padding: 10px;
-            border: 1px solid #000;
-            margin-bottom: 20px;
+            font-size: 20px; /* Reduced font size */
+            margin-bottom: 3px; /* Reduced bottom margin */
             text-transform: uppercase;
         }
 
         h2 {
-            text-transform: uppercase;
-            font-size: 18px;
-            background-color: #f2f2f2;
-            padding: 5px;
-            border: 1px solid #000;
+            text-decoration: underline;
+            font-size: 16px; /* Reduced font size */
             margin-bottom: 10px;
         }
 
         .stream-table {
-            margin-bottom: 30px; /* Added spacing between stream tables */
+            margin-bottom: 40px; /* Increased spacing between stream tables */
         }
 
         table {
@@ -83,21 +77,20 @@
 <body>
     <div class="container">
         <div class="main-heading">
-            Marksheet for {{ $school->name }}
+             {{ $school->name }}
         </div>
         @foreach($streams as $stream)
             <div class="stream-table">
-                <h2>Stream: {{ $stream->name }}</h2>
+                <h2>{{ $stream->name }}</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Adm No</th>
-                            <th>Student Name</th>
-                            <th>Gender</th>
+                            <th>Name</th>
+                            {{-- <th>Gender</th> --}}
                             <th>PP1</th>
                             <th>PP2</th>
-                            <th>AVRG</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,10 +99,9 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $student->adm }}</td>
                                 <td>{{ $student->name }}</td>
-                                <td>{{ $student->gender }}</td>
+                                {{-- <td>{{ $student->gender }}</td> --}}
                                 <td></td> <!-- PP1 column -->
                                 <td></td> <!-- PP2 column -->
-                                <td></td> <!-- AVRG column -->
                             </tr>
                         @endforeach
                     </tbody>

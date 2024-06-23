@@ -23,6 +23,7 @@
                     <th>School</th>
                     <th>Status</th>
                     <th>Action</th>
+                    <th>Download Marksheet</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,14 +35,13 @@
                         <td>
                             <a href="{{ route('streamsForSchool', ['examId' => $exam->id, 'schoolId' => $school->id]) }}" class="btn btn-sm btn-secondary">View</a>
                         </td>
+                        <td>
+                            <a href="{{ route('marksheet', ['schoolId' => $school->id, 'slug' => $school->slug]) }}" class="btn btn-sm btn-primary">Download Marksheet</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     @endif
-</div>
-</div>
-</div>
-</div>
 </div>
 @endsection

@@ -16,12 +16,11 @@
                 <h6 class="m-0 font-weight-bold text-primary">Schools</h6>
 
                 @can('super')
-
-                <!-- Add a link to create a new school -->
-                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
-                    id="#myBtn">
-                    New School
-                </button>
+                    <!-- Add a link to create a new school -->
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
+                        id="#myBtn">
+                        New School
+                    </button>
                 @endcan
             </div>
             <div class="table-responsive p-3">
@@ -36,9 +35,8 @@
                             <th>County</th>
 
                             @can('super')
-
-                            <th>Edit</th>
-                            <th>Delete</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             @endcan
                         </tr>
                     </thead>
@@ -48,26 +46,24 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td>
                                     @can('view-school', $school)
-                                    <a href="{{ route('schools.show', ['id' => $school->id, 'slug' => $school->slug]) }}">{{ $school->name }}</a>
-
+                                        <a
+                                            href="{{ route('schools.show', ['id' => $school->id, 'slug' => $school->slug]) }}">{{ $school->name }}</a>
                                     @else
                                         {{ $school->name }}
                                     @endcan
                                 </td>
                                 <td>{{ $school->level }}</td>
                                 <td>{{ $school->type }}</td>
-                                <td>{{ $school->county }}</td>
+                                <td>{{ $school->county->name }}</td>
                                 @can('super')
-
-
-                                <td>
-                                    <a href="{{ route('schools.edit', ['id' => $school->id]) }}"
-                                        class="text-success">Edit</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="text-danger delete-link"
-                                        data-id="{{ $school->id }}">Delete</a>
-                                </td>
+                                    <td>
+                                        <a href="{{ route('schools.edit', ['id' => $school->id]) }}"
+                                            class="text-success">Edit</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="text-danger delete-link"
+                                            data-id="{{ $school->id }}">Delete</a>
+                                    </td>
                                 @endcan
 
                             </tr>
@@ -121,59 +117,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="county">County</label>
-                            <select name="county" class="form-control mb-3" required>
+                            <label for="county_id">County</label>
+                            <select name="county_id" class="form-control mb-3" required>
                                 <option value="">Select County</option>
-                                <option value="Baringo">Baringo</option>
-                                <option value="Bomet">Bomet</option>
-                                <option value="Bungoma">Bungoma</option>
-                                <option value="Busia">Busia</option>
-                                <option value="Elgeyo-Marakwet">Elgeyo-Marakwet</option>
-                                <option value="Embu">Embu</option>
-                                <option value="Garissa">Garissa</option>
-                                <option value="Homa Bay">Homa Bay</option>
-                                <option value="Isiolo">Isiolo</option>
-                                <option value="Kajiado">Kajiado</option>
-                                <option value="Kakamega">Kakamega</option>
-                                <option value="Kericho">Kericho</option>
-                                <option value="Kiambu">Kiambu</option>
-                                <option value="Kilifi">Kilifi</option>
-                                <option value="Kirinyaga">Kirinyaga</option>
-                                <option value="Kisii">Kisii</option>
-                                <option value="Kisumu">Kisumu</option>
-                                <option value="Kitui">Kitui</option>
-                                <option value="Kwale">Kwale</option>
-                                <option value="Laikipia">Laikipia</option>
-                                <option value="Lamu">Lamu</option>
-                                <option value="Machakos">Machakos</option>
-                                <option value="Makueni">Makueni</option>
-                                <option value="Mandera">Mandera</option>
-                                <option value="Marsabit">Marsabit</option>
-                                <option value="Meru">Meru</option>
-                                <option value="Migori">Migori</option>
-                                <option value="Mombasa">Mombasa</option>
-                                <option value="Murang'a">Murang'a</option>
-                                <option value="Nairobi">Nairobi</option>
-                                <option value="Nakuru">Nakuru</option>
-                                <option value="Nandi">Nandi</option>
-                                <option value="Narok">Narok</option>
-                                <option value="Nyamira">Nyamira</option>
-                                <option value="Nyandarua">Nyandarua</option>
-                                <option value="Nyeri">Nyeri</option>
-                                <option value="Samburu">Samburu</option>
-                                <option value="Siaya">Siaya</option>
-                                <option value="Taita-Taveta">Taita-Taveta</option>
-                                <option value="Tana River">Tana River</option>
-                                <option value="Tharaka-Nithi">Tharaka-Nithi</option>
-                                <option value="Trans Nzoia">Trans Nzoia</option>
-                                <option value="Turkana">Turkana</option>
-                                <option value="Uasin Gishu">Uasin Gishu</option>
-                                <option value="Vihiga">Vihiga</option>
-                                <option value="Wajir">Wajir</option>
-                                <option value="West Pokot">West Pokot</option>
+                                @foreach ($counties as $county)
+                                    <option value="{{ $county->id }}">{{ $county->name }}</option>
+                                @endforeach
                             </select>
                         </div>
-
 
                 </div>
                 <div class="modal-footer">
@@ -186,12 +137,13 @@
     </div>
 
 
+
 @endsection
 
 @push('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endpush
 
 @push('scripts')
@@ -235,7 +187,7 @@
 
                 var schoolId = $(this).data('id');
                 var deleteUrl = '{{ route('schools.destroy', '') }}/' +
-                schoolId; // Update to the appropriate route for school delete
+                    schoolId; // Update to the appropriate route for school delete
 
                 if (confirm('Are you sure you want to delete this school?')) {
                     $.ajax({

@@ -88,7 +88,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $result['stream']->name }}</td>
                     <td>{{ $result['school']->name }}</td>
-                    <td>{{ $result['school']->county }}</td>
+                    <td>{{ $result['school']->county->name }}</td>
                     <td>{{ $result['stream']->students->count() }}</td>
                     <td>{{ $result['stream_mean' ] }}</td>
                 </tr>

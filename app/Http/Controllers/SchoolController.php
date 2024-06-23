@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Form;
+use App\Models\County;
 use App\Models\School;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -13,18 +14,20 @@ class SchoolController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $schools = School::orderBy('name', 'asc')->get();
-    return view('backend.schools.index', ['schools' => $schools]);
-}
+    {
+        $schools = School::orderBy('name', 'asc')->get();
+        $counties = County::orderBy('name', 'asc')->get(); // Fetch all counties
 
+        return view('backend.schools.index', compact('schools', 'counties'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $counties = County::all();
+        return view('backend.schools.create', compact('counties'));
     }
 
     /**
@@ -36,14 +39,14 @@ class SchoolController extends Controller
             'name' => 'required|string|max:255',
             'level' => 'required|string|in:National,Extra-County,County,Sub-County',
             'type' => 'required|string|in:Boys,Girls,Mixed',
-            'county' => 'required|string', // You can further validate county here if needed
+            'county_id' => 'required|exists:counties,id', // Ensure county_id exists in counties table
         ]);
 
         $school = new School();
         $school->name = $validatedData['name'];
         $school->level = $validatedData['level'];
         $school->type = $validatedData['type'];
-        $school->county = $validatedData['county'];
+        $school->county_id = $validatedData['county_id'];
         $school->slug = Str::slug($validatedData['name'], '-'); // Generate slug based on name
         $school->save();
 
@@ -63,16 +66,15 @@ class SchoolController extends Controller
         return view('backend.schools.show', compact('school', 'forms'));
     }
 
-
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
         $school = School::findOrFail($id);
+        $counties = County::all();
 
-        return view('backend.schools.edit', compact('school')); // Create view for editing school
+        return view('backend.schools.edit', compact('school', 'counties'));
     }
 
     /**
@@ -84,7 +86,7 @@ class SchoolController extends Controller
             'name' => 'required|max:255',
             'type' => 'required|in:Boys,Girls,Mixed',
             'level' => 'required|in:National,Extra-County,County,Sub-County',
-            'county' => 'required',
+            'county_id' => 'required|exists:counties,id',
             'status' => 'required|in:0,1',
         ]);
 
@@ -98,15 +100,13 @@ class SchoolController extends Controller
         $school->name = $request->name;
         $school->type = $request->type;
         $school->level = $request->level;
-        $school->county = $request->county;
+        $school->county_id = $request->county_id;
         $school->status = $request->status;
 
         $school->save();
 
         return redirect()->route('schools.index')->with('success', 'School updated successfully.');
     }
-
-
 
     /**
      * Remove the specified resource from storage.

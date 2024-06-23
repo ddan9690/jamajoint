@@ -525,6 +525,7 @@ class ResultController extends Controller
         // Retrieve all students from the specified form
         $students = Student::where('form_id', $form_id)->get();
 
+
         // Initialize an array to store student mean results
         $studentMeans = [];
 

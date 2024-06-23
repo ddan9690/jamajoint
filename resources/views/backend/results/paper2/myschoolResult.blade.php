@@ -21,7 +21,7 @@
         <div class="col-md-12">
             @if(count($results) > 0)
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5>{{ $exam->name }} Form {{ $form->name }} Term {{ $exam->term }} {{ $exam->year }} - {{ $school->name }}</h5>
+                    <h5>{{ $exam->name }} Form {{ $form->name }} Term {{ $exam->term }} {{ $exam->year }} Paper 2 - {{ $school->name }}</h5>
                     <a href="{{ route('downloadPaper2Pdf', ['exam_id' => $exam->id, 'form_id' => $exam->form_id, 'slug' => $school->slug]) }}" class="btn btn-sm  btn-success">Download</a>
                 </div>
 

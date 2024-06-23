@@ -1,119 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>
-        {{ $exam->name }} - Overall Student Ranking PDF
-    </title>
     <style>
-        /* Include styles from the Paper 1 template for consistent design */
+        /* Add your custom CSS styles for PDF here */
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
         }
-
-        .container {
-            max-width: 100%;
-            margin: 10px auto;
-            padding: 10px;
-            text-align: center;
-        }
-
         .table {
             width: 100%;
             border-collapse: collapse;
-            margin: 0 auto;
-            margin-bottom: 10px;
-            font-family: Arial, sans-serif;
-            font-size: 10px; /* Set the font size */
-            text-align: left;
         }
-
-        .table,
-        th,
-        td {
-            border: 1px solid #000;
-            padding: 4px; /* Set the padding */
+        .table td, .table th {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: center;
         }
-
-        th,
-        td {
-            white-space: nowrap;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
+        .table th {
             background-color: #f2f2f2;
         }
-
         .overall-row {
             background-color: #c9c9c9;
             font-weight: bold;
         }
-
         .text-info {
             color: blue;
         }
-
         .text-decoration-underline {
             text-decoration: underline;
-        }
-
-        .exam-details {
-            text-transform: uppercase;
-            font-weight: bold;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            font-size: 16px; /* Set the font size */
-            text-decoration: underline;
-            margin-bottom: 5px; /* Adjust spacing between exam details and table */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h5 class="exam-details">
-            {{ $exam->name }} Term {{ $exam->term }} {{ $exam->year }} - Overall Student Ranking
-        </h5>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>ADM</th>
-                    <th>NAME</th>
-                    <th>GENDER</th>
-                    <th>SCHOOL</th>
-                    <th>STRM</th>
-                    <th>PP1</th>
-                    <th>PP2</th>
-                    <th>AVG</th>
-                    <th>GRD</th>
-                    <th>RNK</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($studentMeans as $result)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $result['student']->adm }}</td>
-                    <td>{{ $result['student']->name }}</td>
-                    <td>{{ $result['student']->gender }}</td>
-                    <td>{{ $result['student']->school->name }}</td>
-                    <td>{{ $result['student']->stream->name }}</td>
-                    <td>{{ $result['subject1Marks'] }}</td>
-                    <td>{{ $result['subject2Marks'] }}</td>
-                    <td>{{ $result['average'] }}</td>
-                    <td>{{ $result['grade'] }}</td>
-                    <td>{{ $result['rank'] }}</td>
-                </tr>
+    <h5>{{ $exam->name }} Form {{ $exam->form->name }} Term {{ $exam->term }} {{ $exam->year }} - Overall Student Ranking</h5>
+
+    <!-- Main Results Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ADM</th>
+                <th>NAME</th>
+                <th>GENDER</th>
+                <th>SCHOOL</th>
+                <th>STRM</th>
+                <th>PP1</th>
+                <th>PP2</th>
+                <th>AVG</th>
+                <th>GRD</th>
+                <th>RNK</th>
+                <!-- Add other columns here -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($results as $result)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $result['student']->adm }}</td>
+                <td>{{ $result['student']->name }}</td>
+                <td>{{ $result['student']->gender }}</td>
+                <td>{{ $result['student']->school->name }}</td>
+                <td>{{ $result['student']->stream->name }}</td>
+                <td>{{ $result['subject1Marks'] }}</td>
+                <td>{{ $result['subject2Marks'] }}</td>
+                <td>{{ $result['average'] }}</td>
+                <td>{{ $result['grade'] }}</td>
+                <td>{{ $result['rank'] }}</td>
+                <!-- Add other columns here -->
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <!-- Grade Analysis Table -->
+    <h5 class="text-info text-decoration-underline">Grade Analysis</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Stream</th>
+                @foreach ($gradingSystem as $grade)
+                    <th>{{ $grade->grade }}</th>
                 @endforeach
-            </tbody>
-        </table>
-    </div>
+                <th>Total</th>
+                <th>Mean</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php
+                $sortedAnalysis = collect($analysis)->sortByDesc('mean');
+            @endphp
+
+            @foreach ($sortedAnalysis as $item)
+                <tr>
+                    <td>{{ $item['stream'] }}</td>
+                    @foreach ($gradingSystem as $grade)
+                        <td>{{ $item['grades'][$grade->grade] }}</td>
+                    @endforeach
+                    <td>{{ $item['total'] }}</td>
+                    <td>{{ $item['mean'] }}</td>
+                </tr>
+            @endforeach
+
+            <!-- Overall analysis row -->
+            <tr class="overall-row">
+                <td>Overall</td>
+                @php
+                    $overallTotal = 0;
+                    $overallMean = 0;
+                @endphp
+                @foreach ($gradingSystem as $grade)
+                    <td>
+                        @php
+                            $gradeCount = 0;
+                            foreach ($sortedAnalysis as $item) {
+                                $gradeCount += $item['grades'][$grade->grade];
+                            }
+                            echo $gradeCount;
+                            $overallTotal += $gradeCount;
+                            $gradePoints = $gradingSystem->where('grade', $grade->grade)->first()->points ?? 0;
+                            $overallMean += ($gradeCount * $gradePoints);
+                        @endphp
+                    </td>
+                @endforeach
+                <td>{{ $overallTotal }}</td>
+                <td>{{ $overallTotal > 0 ? round($overallMean / $overallTotal, 4) : 0 }}</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

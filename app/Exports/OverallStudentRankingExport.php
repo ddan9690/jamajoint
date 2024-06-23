@@ -2,61 +2,119 @@
 
 namespace App\Exports;
 
-use App\Models\Exam;
-use App\Models\Grading;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Style;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class OverallStudentRankingExport implements FromCollection, WithHeadings
+class OverallStudentRankingExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithEvents, ShouldAutoSize
 {
     protected $exam;
     protected $studentMeans;
-    protected $gradingSystem;
 
-    /**
-     * Constructor to initialize necessary data.
-     *
-     * @param  \App\Models\Exam  $exam
-     * @param  array  $studentMeans
-     * @param  \Illuminate\Database\Eloquent\Collection  $gradingSystem
-     */
-    public function __construct(Exam $exam, array $studentMeans, Collection $gradingSystem)
+    public function __construct($exam, $studentMeans)
     {
         $this->exam = $exam;
         $this->studentMeans = $studentMeans;
-        $this->gradingSystem = $gradingSystem;
     }
 
-    /**
-     * Return the collection of data to be exported.
-     *
-     * @return \Illuminate\Support\Collection
-     */
     public function collection()
     {
         return collect($this->studentMeans);
     }
 
-    /**
-     * Define the headings for the exported Excel file.
-     *
-     * @return array
-     */
     public function headings(): array
     {
         return [
-            '#',
-            'ADM',
-            'NAME',
-            'GENDER',
-            'SCHOOL',
-            'STRM',
-            'PP1',
-            'PP2',
-            'AVG',
-            'GRD',
-            'RNK',
+            [ strtoupper($this->exam->name) . ' - ' . strtoupper($this->exam->year) . ' TERM: ' . strtoupper($this->exam->term)],
+            ['#', 'ADM', 'NAME', 'GENDER', 'SCHOOL', 'STREAM', 'PP1', 'PP2', 'AVG', 'GRD', 'RNK']
+        ];
+    }
+
+    public function map($studentMean): array
+    {
+        return [
+            $studentMean['rank'],
+            $studentMean['student']->adm,
+            $studentMean['student']->name,
+            $studentMean['student']->gender,
+            $studentMean['student']->school->name,
+            $studentMean['student']->stream->name,
+            $studentMean['subject1Marks'],
+            $studentMean['subject2Marks'],
+            $studentMean['average'],
+            $studentMean['grade'],
+            $studentMean['rank']
+        ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        // Apply styles to the first row (exam details)
+        $sheet->mergeCells('A1:K1');
+        $sheet->getStyle('A1:K1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 12,
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        // Apply styles to the column headings
+        $sheet->getStyle('A2:K2')->applyFromArray([
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+            ],
+        ]);
+
+        // Apply border to all cells
+        $sheet->getStyle('A1:K' . (count($this->studentMeans) + 2))->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+            ],
+        ]);
+
+        // Apply bold style to AVG and GRD column data
+        $sheet->getStyle('I3:I' . (count($this->studentMeans) + 2))->getFont()->setBold(true);
+        $sheet->getStyle('J3:J' . (count($this->studentMeans) + 2))->getFont()->setBold(true);
+
+        return [
+            // Additional styles can be added here
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                // Set the column widths
+                foreach (range('A', 'K') as $column) {
+                    $event->sheet->getDelegate()->getColumnDimension($column)->setAutoSize(true);
+                }
+            },
         ];
     }
 }
+

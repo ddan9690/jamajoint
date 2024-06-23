@@ -51,8 +51,6 @@
         crossorigin="anonymous"></script>
 </head>
 
-
-
 <body class="bg-gradient-login">
     <!-- Register Content -->
     <div class="container-login">
@@ -69,10 +67,9 @@
                                                 alt="Cyberspace Logo" width="150px">
                                         </a>
                                         <h1 class="h4 text-gray-900 mb-4">Register</h1>
-
                                     </div>
 
-                                    <form method="POST" action="{{ route('register') }}">
+                                    <form method="POST" action="{{ route('register') }}" id="registerForm">
                                         @csrf
 
                                         <div class="form-group">
@@ -87,21 +84,22 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="exampleInputSchool">School</label>
-                                            {{-- <span style="color: green;">(If your school is not listed, contact
-                                                admin)</span> --}}
-                                            <select class="form-control" id="exampleInputSchool" name="school_id"
-                                                placeholder="Select a school">
-                                                <option value="" disabled>Select a school</option>
-                                                @foreach ($schools as $school)
-                                                    <option value="{{ $school->id }}"
-                                                        {{ old('school_id') == $school->id ? 'selected' : '' }}>
-                                                        {{ $school->name }}-{{ $school->county }}
-                                                    </option>
+                                            <label for="county_id">County</label>
+                                            <select class="form-control" id="county_id" name="county_id" required>
+                                                <option value="" disabled selected>Select a county</option>
+                                                @foreach ($counties as $county)
+                                                    <option value="{{ $county->id }}">{{ $county->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label for="exampleInputSchool">School</label>
+                                            <select class="form-control" id="exampleInputSchool" name="school_id"
+                                                placeholder="Select a school" required>
+                                                <option value="" disabled selected>Select a school</option>
+                                            </select>
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="exampleInputPhone">Phone</label>
@@ -130,9 +128,7 @@
                                             <input type="password"
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 id="exampleInputPassword" name="password"
-                                                placeholder="Enter your password" required
-                                                value="{{ old('password') }}">
-
+                                                placeholder="Enter your password" required>
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                             @enderror
@@ -143,9 +139,7 @@
                                             <input type="password"
                                                 class="form-control @error('password_confirmation') is-invalid @enderror"
                                                 id="exampleInputPasswordRepeat" name="password_confirmation"
-                                                placeholder="Repeat your password" required
-                                                value="{{ old('password_confirmation') }}">
-
+                                                placeholder="Repeat your password" required>
                                             @error('password_confirmation')
                                                 <span class="invalid-feedback" role="alert">{{ $message }}</span>
                                             @enderror
@@ -158,8 +152,6 @@
                                         <hr>
                                     </form>
 
-
-
                                     <hr>
                                     <div class="text-center">
                                         <a class="font-weight-bold small" href="{{ route('login') }}">Already have an
@@ -171,7 +163,6 @@
                                     <div class="text-center">
                                         {{-- <a href="{{ route('login.facebook') }}"
                                             class="btn btn-primary btn-block">Register with Facebook</a> --}}
-
                                     </div>
 
                                 </div>
@@ -183,6 +174,7 @@
         </div>
     </div>
     <!-- Register Content -->
+
     <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('backend/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
@@ -191,11 +183,50 @@
 
     <script>
         $(document).ready(function() {
+            // Initialize Select2 on the county select element
+            // $('#county_id').select2({
+            //     placeholder: "Select a county",
+            //     allowClear: true
+            // });
+
             // Initialize Select2 on the school select element
             $('#exampleInputSchool').select2({
-                placeholder: "Select a school", // Set a placeholder text
-                allowClear: true, // Allow clearing the selected option
+                placeholder: "Select a school",
+                allowClear: true
+            });
 
+            // Handle change event on county select
+            $('#county_id').on('change', function() {
+                var countyId = $(this).val();
+                if (countyId) {
+                    $.ajax({
+                        url: '{{ route('schools.fetch') }}',
+                        type: 'GET',
+                        data: {
+                            county_id: countyId
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            $('#exampleInputSchool').empty(); // Clear the current options
+                            $('#exampleInputSchool').append(
+                                '<option value="" disabled selected>Select a school</option>'
+                                );
+                            $.each(data, function(id, name) {
+                                $('#exampleInputSchool').append('<option value="' + id +
+                                    '">' + name + '</option>');
+                            });
+                            // Refresh Select2 after updating options
+                            $('#exampleInputSchool').trigger('change.select2');
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            console.log('Error fetching schools: ' + errorThrown);
+                        }
+                    });
+                } else {
+                    $('#exampleInputSchool').empty();
+                    $('#exampleInputSchool').append(
+                        '<option value="" disabled selected>Select a school</option>');
+                }
             });
         });
     </script>

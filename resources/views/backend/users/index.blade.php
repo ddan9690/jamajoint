@@ -32,7 +32,7 @@
                 <tbody>
                     @foreach ($users as $index => $user)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $index + 1 }} </td>
                         <td>
                             <a href="{{ route('users.show', $user->id) }}">{{ $user->name }}</a>
                         </td>

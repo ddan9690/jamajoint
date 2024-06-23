@@ -3,6 +3,42 @@
 
 @section('content')
 
+<style>
+    .slider {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background: #f8f9fa;
+    padding: 20px 0;
+}
+
+.slider-inner {
+    display: flex;
+    width: calc(200px * 5); /* Width of a single item times the number of items */
+    animation: slide 20s linear infinite;
+}
+
+.slider-item {
+    min-width: 200px;
+    max-width: 200px;
+    flex: 0 0 auto;
+    margin: 0 10px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+</style>
+
  <!-- About Start -->
  <div class="container-xxl py-5">
     <div class="container px-lg-5">
@@ -103,6 +139,53 @@
 
 
 <!-- Service End -->
+
+<!-- Statistics Start -->
+<div class="container-xxl py-5">
+    <div class="container px-lg-5">
+        <div class="row g-5">
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="d-flex flex-column justify-content-center text-center rounded bg-light py-5">
+                    <h1 class="display-4 mb-3 text-primary" data-toggle="counter-up">10</h1>
+                    <p class="mb-0">Joints Analyzed</p>
+                </div>
+            </div>
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="d-flex flex-column justify-content-center text-center rounded bg-light py-5">
+                    <h1 class="display-4 mb-3 text-primary" data-toggle="counter-up">15,600</h1>
+                    <p class="mb-0">Students Processed</p>
+                </div>
+            </div>
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="d-flex flex-column justify-content-center text-center rounded bg-light py-5">
+                    <h1 class="display-4 mb-3 text-primary" data-toggle="counter-up">500+</h1>
+                    <p class="mb-0">Active Registered Teachers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Statistics End -->
+
+<!-- Latest Joints Analyzed Start -->
+<div class="container-xxl py-5">
+    <div class="container px-lg-5">
+        <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="position-relative d-inline text-primary ps-4">Latest Joints Analyzed</h6>
+            <h2 class="mt-2">Recent Joint Examinations</h2>
+        </div>
+        <div class="slider">
+            <div class="slider-inner">
+                <div class="slider-item"><h5 class="mb-0">KISIHO History Joint Exam</h5></div>
+                <div class="slider-item"><h5 class="mb-0">The Spark Hotbed of Mathematics Joint</h5></div>
+                <div class="slider-item"><h5 class="mb-0">Kisumiro CRE Joint Evaluation</h5></div>
+                <div class="slider-item"><h5 class="mb-0">Geography Intercounty Joint Examination</h5></div>
+                <div class="slider-item"><h5 class="mb-0">Cyberspace National History Joint Exam</h5></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Latest Joints Analyzed End -->
 
 
 <!-- Portfolio Start -->
@@ -325,3 +408,40 @@
 
 
 @endsection
+
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-countto/1.2.0/jquery.countTo.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="counter-up"]').countTo({
+            formatter: function (value, options) {
+                return value.toFixed(options.decimals);
+            },
+        });
+    });
+</script>
+@endsection
+
+@push('scripts')
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+<script>
+$(document).ready(function() {
+    function slideAnimation() {
+        $('.slider-inner').css({
+            transform: 'translateX(0)',
+            transition: 'transform 0s'
+        });
+        setTimeout(function() {
+            $('.slider-inner').css({
+                transform: 'translateX(-100%)',
+                transition: 'transform 20s linear'
+            });
+        }, 100);
+    }
+
+    $('.slider-inner').on('transitionend', slideAnimation);
+    slideAnimation();
+});
+</script>
+
+@endpush

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Exam;
 use App\Models\Form;
 use App\Models\User;
+use App\Models\County;
 use App\Models\Stream;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class School extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'level', 'type', 'county_id'];
+
+
+    public function county()
+    {
+        return $this->belongsTo(County::class);
+    }
 
     public function streams(): HasMany
     {

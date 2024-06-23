@@ -1,76 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Marksheet for {{ $school->name }}</title>
+    <title>{{ $exam->name }} Term {{ $exam->term }} {{ $exam->year }} School Ranking</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
-
         .container {
             max-width: 100%;
             margin: 20px auto;
             padding: 20px;
             text-align: center;
         }
-
-        .main-heading {
-            font-weight: bold;
-            font-size: 24px;
-            background-color: #f2f2f2;
-            padding: 10px;
-            border: 1px solid #000;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+        .logo {
+            max-width: 150px;
+            margin: 0 auto 10px;
+            display: block;
         }
-
-        h2 {
-            text-transform: uppercase;
-            font-size: 18px;
-            background-color: #f2f2f2;
-            padding: 5px;
-            border: 1px solid #000;
-            margin-bottom: 10px;
-        }
-
-        .stream-table {
-            margin-bottom: 30px; /* Added spacing between stream tables */
-        }
-
         table {
-            width: 80%;
+            width: 100%;
             border-collapse: collapse;
             margin: 0 auto;
             margin-bottom: 20px;
             font-family: Arial, sans-serif;
         }
-
         table, th, td {
             border: 1px solid #000;
             font-size: 10px;
         }
-
         th, td {
             padding: 4px;
             text-transform: uppercase;
         }
-
         th {
             background-color: #f2f2f2;
         }
-
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-
         th, td {
             white-space: nowrap;
         }
-
         .exam-details {
             text-transform: uppercase;
             font-weight: bold;
@@ -79,47 +52,38 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
-        <div class="main-heading">
-            Marksheet for {{ $school->name }}
+        @if ($exam->form->name == '3')
+            <img src="{{ public_path('backend/img/logo/cyberspace-national-joint-logo.png') }}" alt="Logo" class="logo">
+        @endif
+        <div class="exam-details">
+            {{ $exam->name }} Form {{ $exam->form->name }} Term {{ $exam->term }} {{ $exam->year }}
+            <div>School Ranking</div>
         </div>
-        @foreach($streams as $stream)
-            <div class="stream-table">
-                <h2>Stream: {{ $stream->name }}</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Adm No</th>
-                            <th>Student Name</th>
-                            <th>Gender</th>
-                            <th>PP1</th>
-                            <th>PP2</th>
-                            <th>AVRG</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($stream->students as $index => $student)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $student->adm }}</td>
-                                <td>{{ $student->name }}</td>
-                                <td>{{ $student->gender }}</td>
-                                <td></td> <!-- PP1 column -->
-                                <td></td> <!-- PP2 column -->
-                                <td></td> <!-- AVRG column -->
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @endforeach
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>School</th>
+                    <th>Entry</th>
+                    <th>Mean</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($schoolMeans as $index => $result)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $result['school']->name }}</td>
+                    <td>{{ $result['total_ranked_students'] }}</td>
+                    <td>{{ $result['school_mean'] }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
         <div style="text-align: center; font-weight: bold;">
             www.jamajoint.co.ke
         </div>
     </div>
 </body>
-
 </html>

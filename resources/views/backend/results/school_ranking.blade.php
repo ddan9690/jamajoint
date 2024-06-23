@@ -32,7 +32,7 @@
                     <tr>
                         <th>#</th>
                         <th>SCHOOL</th>
-                        <th>COUNTY</th>
+                        {{-- <th>COUNTY</th> --}}
                         <th>ENTRY</th>
                         <th>MEAN</th>
                     </tr>
@@ -42,7 +42,7 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $schoolData['school']->name }}</td>
-                        <td>{{ $schoolData['school']->county->name }}</td>
+                        {{-- <td>{{ $schoolData['school']->county->name }}</td> --}}
                         <td>{{ $schoolData['ranked_students_count'] }}</td>
                         <td>{{ $schoolData['school_mean'] }}</td>
                     </tr>

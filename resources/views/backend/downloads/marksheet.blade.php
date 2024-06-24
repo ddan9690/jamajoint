@@ -33,6 +33,7 @@
 
         .stream-table {
             margin-bottom: 40px; /* Increased spacing between stream tables */
+            page-break-before: always; /* Ensures each stream table starts on a new page */
         }
 
         table {

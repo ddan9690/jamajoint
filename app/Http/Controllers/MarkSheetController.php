@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\School;
 use App\Models\Stream;
-use App\Models\Student;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
-
 
 class MarksheetController extends Controller
 {
@@ -27,8 +25,8 @@ class MarksheetController extends Controller
         // Create a custom filename for the marksheet PDF
         $filename = str_replace(' ', '_', $school->name) . '.pdf';
 
-
         // Download the marksheet PDF with the custom filename
         return $pdf->download($filename);
     }
 }
+

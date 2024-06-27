@@ -32,7 +32,7 @@
                             <th>Name</th>
                             <th>Level</th>
                             <th>Type</th>
-                            <th>County</th>
+                            {{-- <th>County</th> --}}
 
                             @can('super')
                                 <th>Edit</th>
@@ -54,7 +54,7 @@
                                 </td>
                                 <td>{{ $school->level }}</td>
                                 <td>{{ $school->type }}</td>
-                                <td>{{ $school->county->name }}</td>
+                                {{-- <td>{{ $school->county->name }}</td> --}}
                                 @can('super')
                                     <td>
                                         <a href="{{ route('schools.edit', ['id' => $school->id]) }}"

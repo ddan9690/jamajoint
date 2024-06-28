@@ -20,47 +20,46 @@ class OverallRankingPDFContoller extends Controller
         // Retrieve the grading system associated with the exam
         $gradingSystem = Grading::where('grading_system_id', $exam->grading_system_id)->get();
 
-        // Initialize an array to store student mean results
+        // Initialize a variable to store student means
         $studentMeans = [];
 
-        // Determine the chunk size
+        // Define chunk size
         $chunkSize = 100; // Adjust the chunk size as needed
 
-        // Process students in chunks
-        Student::where('form_id', $form_id)->chunk($chunkSize, function ($students) use ($exam, $gradingSystem, &$studentMeans) {
+        // Retrieve students using cursor pagination
+        Student::where('form_id', $form_id)
+            ->chunk($chunkSize, function ($students) use ($exam, $gradingSystem, &$studentMeans) {
+                foreach ($students as $student) {
+                    // Filter students to include only those with marks in both subjects for the specified exam
+                    $subject1Marks = Mark::where('student_id', $student->id)
+                        ->where('exam_id', $exam->id)
+                        ->where('subject_id', 1)
+                        ->sum('marks');
 
-            // Calculate the mean for each student in the chunk
-            foreach ($students as $student) {
-                // Filter students to include only those with marks in both subjects for the specified exam
-                $subject1Marks = Mark::where('student_id', $student->id)
-                    ->where('exam_id', $exam->id)
-                    ->where('subject_id', 1)
-                    ->sum('marks');
+                    $subject2Marks = Mark::where('student_id', $student->id)
+                        ->where('exam_id', $exam->id)
+                        ->where('subject_id', 2)
+                        ->sum('marks');
 
-                $subject2Marks = Mark::where('student_id', $student->id)
-                    ->where('exam_id', $exam->id)
-                    ->where('subject_id', 2)
-                    ->sum('marks');
+                    // Check if both subject marks are greater than 0
+                    if ($subject1Marks > 0 && $subject2Marks > 0) {
+                        // Calculate the average
+                        $average = round(($subject1Marks + $subject2Marks) / 2);
 
-                // Check if both subject marks are greater than 0
-                if ($subject1Marks > 0 && $subject2Marks > 0) {
-                    // Calculate the average
-                    $average = round(($subject1Marks + $subject2Marks) / 2);
+                        // Determine the grade based on the grading system
+                        $grade = $this->calculateGrade($average, $gradingSystem);
 
-                    // Determine the grade based on the grading system
-                    $grade = $this->calculateGrade($average, $gradingSystem);
-
-                    // Store the student's result including subject-wise marks
-                    $studentMeans[] = [
-                        'student' => $student,
-                        'subject1Marks' => $subject1Marks,
-                        'subject2Marks' => $subject2Marks,
-                        'average' => $average,
-                        'grade' => $grade,
-                    ];
+                        // Add student data directly to the PDF stream
+                        $studentMeans[] = [
+                            'student' => $student,
+                            'subject1Marks' => $subject1Marks,
+                            'subject2Marks' => $subject2Marks,
+                            'average' => $average,
+                            'grade' => $grade,
+                        ];
+                    }
                 }
-            }
-        });
+            });
 
         // Sort the students by average in descending order
         usort($studentMeans, function ($a, $b) {
@@ -71,11 +70,13 @@ class OverallRankingPDFContoller extends Controller
         $rank = 1;
 
         // Calculate the rank while considering students with the same average marks
-        foreach ($studentMeans as $key => $studentMean) {
-            if ($key > 0 && $studentMean['average'] != $studentMeans[$key - 1]['average']) {
+        foreach ($studentMeans as $key => &$studentMean) {
+            if ($key > 0 && $studentMean['average'] == $studentMeans[$key - 1]['average']) {
+                $studentMean['rank'] = $rank;
+            } else {
                 $rank = $key + 1;
+                $studentMean['rank'] = $rank;
             }
-            $studentMeans[$key]['rank'] = $rank;
         }
 
         // Generate the PDF view for overall student ranking

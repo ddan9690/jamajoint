@@ -21,6 +21,7 @@ use App\Http\Controllers\ExcelDownloadController;
 use App\Http\Controllers\GradingSystemController;
 use App\Http\Controllers\PaperAnalysisController;
 use App\Http\Controllers\OverallRankingController;
+use App\Http\Controllers\OverallRankingPDFContoller;
 
 Route::get('/', function () {
     return view('index');
@@ -197,6 +198,7 @@ Route::middleware(['auth'])->group(function () {
 
 
         Route::get('export-overall-student-ranking/{id}/{slug}/{form_id}', [OverallRankingController::class, 'exportExcel'])->name('export.overall-student-ranking');
+        Route::get('export-overall-student-ranking-pdf/{id}/{slug}/{form_id}', [OverallRankingPDFContoller::class, 'exportPDF'])->name('pdf.overall-student-ranking');
 
 });
 

@@ -24,11 +24,12 @@
                         Download
                     </button>
                     <div class="dropdown-menu">
-                        {{-- <a href="{{ route('pdf.overall-student-ranking', ['id' => $exam->id, 'slug' => $exam->slug, 'form_id' => $exam->form_id]) }}" class="dropdown-item">
-                            <i class="fas fa-file-pdf fa-fw"></i> Overall Student Ranking (PDF)
-                        </a> --}}
+                        <a href="{{ route('pdf.overall-student-ranking', ['id' => $exam->id, 'slug' => $exam->slug, 'form_id' => $exam->form_id]) }}" class="dropdown-item">
+                            <i class="fas fa-file-pdf fa-fw"></i> PDF
+                        </a>
+
                         <a href="{{ route('export.overall-student-ranking', ['id' => $exam->id, 'slug' => $exam->slug, 'form_id' => $exam->form_id]) }}" class="dropdown-item">
-                            <i class="fas fa-file-excel fa-fw"></i> Overall Student Ranking (Excel)
+                            <i class="fas fa-file-excel fa-fw"></i> Excel
                         </a>
 
 

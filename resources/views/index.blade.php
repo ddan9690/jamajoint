@@ -152,7 +152,7 @@
             </div>
             <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="d-flex flex-column justify-content-center text-center rounded bg-light py-5">
-                    <h1 class="display-4 mb-3 text-primary" data-toggle="counter-up">15,600</h1>
+                    <h1 class="display-4 mb-3 text-primary" data-toggle="counter-up">30,600</h1>
                     <p class="mb-0">Students Processed</p>
                 </div>
             </div>

@@ -15,7 +15,7 @@
             max-width: 100%;
             margin: 20px auto;
             padding: 20px;
-            text-align: center;
+            text-align: left; /* Align text to the left */
         }
 
         .main-heading {
@@ -29,6 +29,7 @@
             text-decoration: underline;
             font-size: 16px; /* Reduced font size */
             margin-bottom: 10px;
+            text-transform: uppercase; /* Ensure titles are uppercase */
         }
 
         .stream-table {
@@ -82,7 +83,8 @@
         </div>
         @foreach($streams as $stream)
             <div class="stream-table">
-                <h2>{{ $stream->name }}</h2>
+                <h2>SCHOOL: {{ $school->name }}</h2>
+                <h2>STREAM: {{ $stream->name }}</h2>
                 <table>
                     <thead>
                         <tr>

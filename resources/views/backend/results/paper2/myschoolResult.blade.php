@@ -63,7 +63,7 @@
                             @foreach ($gradingSystem as $grade)
                                 <th x-show="isExpanded">{{ $grade->grade }}</th>
                             @endforeach
-                            <th>Total</th>
+                            <th>Entry</th>
                             <th>Mean</th>
                         </tr>
                     </thead>

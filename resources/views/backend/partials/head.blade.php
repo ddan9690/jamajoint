@@ -19,6 +19,7 @@
     <link rel="manifest" href="{{ asset('frontend/img/favicon/site.webmanifest') }}">
 
     <title>@yield('title', 'JamaJoint:: Analysis Portal')</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="{{ asset('backend/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">

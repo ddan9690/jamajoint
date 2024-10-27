@@ -68,7 +68,7 @@
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -84,32 +84,45 @@
             }
         });
 
-        // Handle form submission using AJAX
+        // Handle form submission using AJAX with confirmation
         $('#submit-marks').click(function() {
-            // Filter out empty marks inputs before serialization
-            $('.marks-input').each(function() {
-                if ($(this).val() === "") {
-                    $(this).removeAttr("name"); // Remove the name attribute for empty inputs
-                }
-            });
-
-            $(this).prop('disabled', true);
-
-            $.ajax({
-                type: 'POST',
-                url: $('#marks-form').attr('action'),
-                data: $('#marks-form').serialize(),
-                success: function(response) {
-                    $('#submit-marks').prop('disabled', false);
-                    swal("Success!", "Marks have been submitted successfully!", "success").then(function() {
-                        // Redirect to a new page or perform any other action as needed
-                        window.location.href = "{{ route('marks.index', ['exam' => $exam->id, 'stream' => $stream->id, 'subject' => $subject->id]) }}";
+            // Show confirmation alert
+            swal({
+                title: "Are you sure?",
+                // text: "Once submitted, you will not be able to change the marks!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willSubmit) => {
+                if (willSubmit) {
+                    // Filter out empty marks inputs before serialization
+                    $('.marks-input').each(function() {
+                        if ($(this).val() === "") {
+                            $(this).removeAttr("name"); // Remove the name attribute for empty inputs
+                        }
                     });
-                },
-                error: function(xhr) {
-                    console.log(xhr);
-                    $('#submit-marks').prop('disabled', false);
-                    swal("Oops! Something went wrong.", "Please try again later.", "error");
+
+                    $(this).prop('disabled', true); // Disable button to prevent multiple submissions
+
+                    $.ajax({
+                        type: 'POST',
+                        url: $('#marks-form').attr('action'),
+                        data: $('#marks-form').serialize(),
+                        success: function(response) {
+                            $('#submit-marks').prop('disabled', false);
+                            swal("Success!", "Marks have been submitted successfully!", "success").then(function() {
+                                // Redirect to a new page or perform any other action as needed
+                                window.location.href = "{{ route('marks.index', ['exam' => $exam->id, 'stream' => $stream->id, 'subject' => $subject->id]) }}";
+                            });
+                        },
+                        error: function(xhr) {
+                            console.log(xhr);
+                            $('#submit-marks').prop('disabled', false);
+                            swal("Oops! Something went wrong.", "Please try again later.", "error");
+                        }
+                    });
+                } else {
+                    swal("Submission cancelled!");
                 }
             });
         });

@@ -16,7 +16,7 @@
         font-weight: bold;
     }
 </style>
-<div class="container">
+<div class="container" x-data="{ isExpanded: false }">
     <div class="row">
         <div class="col-md-12">
             @if(count($results) > 0)
@@ -55,14 +55,17 @@
 
                 <!-- Grade Analysis Table for Paper 1 -->
                 <h5 class="text-info text-decoration-underline">Paper 1 Grade Analysis</h5>
+                <button @click="isExpanded = !isExpanded" class="btn btn-primary btn-sm mb-2">
+                    <span x-text="isExpanded ? 'Minimize Grades' : 'Expand Grades'"></span>
+                </button>
                 <table id="paper1-analysis-table" class="table table-sm table-responsive align-items-center table-flush table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Stream</th>
+                            <th >Stream</th>
                             @foreach ($gradingSystem as $grade)
-                                <th>{{ $grade->grade }}</th>
+                                <th x-show="isExpanded">{{ $grade->grade }}</th>
                             @endforeach
-                            <th>Total</th>
+                            <th>Entry</th>
                             <th>Mean</th>
                         </tr>
                     </thead>
@@ -74,9 +77,9 @@
 
                         @foreach ($sortedAnalysis as $item)
                             <tr>
-                                <td>{{ $item['stream'] }}</td>
+                                <td >{{ $item['stream'] }}</td>
                                 @foreach ($gradingSystem as $grade)
-                                    <td>{{ $item['grades'][$grade->grade] }}</td>
+                                    <td x-show="isExpanded">{{ $item['grades'][$grade->grade] }}</td>
                                 @endforeach
                                 <td>{{ $item['total'] }}</td>
                                 <td>{{ $item['mean'] }}</td>
@@ -91,7 +94,7 @@
                                 $overallMean = 0;
                             @endphp
                             @foreach ($gradingSystem as $grade)
-                                <td>
+                                <td x-show="isExpanded">
                                     @php
                                         $gradeCount = 0;
                                         foreach ($sortedAnalysis as $item) {
@@ -121,6 +124,8 @@
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.23/js/jquery.dataTables.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 <script>
     $(document).ready(function () {
         // DataTable for Paper 1 results

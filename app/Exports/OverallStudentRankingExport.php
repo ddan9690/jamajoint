@@ -100,9 +100,7 @@ class OverallStudentRankingExport implements FromCollection, WithHeadings, WithM
         $sheet->getStyle('I3:I' . (count($this->studentMeans) + 2))->getFont()->setBold(true);
         $sheet->getStyle('J3:J' . (count($this->studentMeans) + 2))->getFont()->setBold(true);
 
-        return [
-            // Additional styles can be added here
-        ];
+        return [];
     }
 
     public function registerEvents(): array
@@ -113,8 +111,12 @@ class OverallStudentRankingExport implements FromCollection, WithHeadings, WithM
                 foreach (range('A', 'K') as $column) {
                     $event->sheet->getDelegate()->getColumnDimension($column)->setAutoSize(true);
                 }
+
+                // Set rows to repeat at the top of each printed page (Rows 1 and 2)
+                $event->sheet->getDelegate()->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(1, 2);
             },
         ];
     }
 }
+
 

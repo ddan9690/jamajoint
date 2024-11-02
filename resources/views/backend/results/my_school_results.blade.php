@@ -28,7 +28,7 @@
                 <div class="mb-3">
                     <div class="btn-group">
                         <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Download Results
+                            <i class="fas fa-download fa-fw"></i>  Results
                         </button>
                         <div class="dropdown-menu" x-placement="top-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -2px, 0px);">
                             <a href="{{ route('pdf-download.student-results', ['id' => $exam->id, 'form_id' => $exam->form_id, 'slug' => $school->slug]) }}" class="dropdown-item">
@@ -78,7 +78,7 @@
                         <span x-text="isExpanded ? 'Minimize Grades' : 'Expand Grades'"></span>
                     </button>
                     <a href="{{ route('pdf-download.grade-analysis', ['id' => $exam->id, 'form_id' => $exam->form_id, 'slug' => $school->slug]) }}" class="btn btn-success btn-sm">
-                        <i class="fas fa-file-pdf fa-fw"></i> Download Grade Analysis (PDF)
+                        <i class="fas fa-download fa-fw"></i> Grade Analysis (PDF)
                     </a>
                 </div>
 

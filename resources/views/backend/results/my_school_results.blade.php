@@ -12,7 +12,7 @@
 
     /* Add a custom style for the overall row */
     .overall-row {
-        background-color: #c9c9c9; /* Change this color to your desired background color */
+        background-color: #c9c9c9; 
         font-weight: bold;
     }
 </style>
@@ -22,17 +22,17 @@
             @if(count($results) > 0)
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5>{{ $exam->name }} Form {{ $exam->form->name }} Term {{ $exam->term }} {{ $exam->year }} - {{ $school->name }}</h5>
+                </div>
 
+                <!-- Download Button for Results -->
+                <div class="mb-3">
                     <div class="btn-group">
                         <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Download
+                            Download Results
                         </button>
                         <div class="dropdown-menu" x-placement="top-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -2px, 0px);">
                             <a href="{{ route('pdf-download.student-results', ['id' => $exam->id, 'form_id' => $exam->form_id, 'slug' => $school->slug]) }}" class="dropdown-item">
                                 <i class="fas fa-file-pdf fa-fw"></i> Merit List (PDF)
-                            </a>
-                            <a href="{{ route('pdf-download.grade-analysis', ['id' => $exam->id, 'form_id' => $exam->form_id, 'slug' => $school->slug]) }}" class="dropdown-item">
-                                <i class="fas fa-file-pdf fa-fw"></i> Grade Analysis (PDF)
                             </a>
                             <a href="{{ route('excel-download.my-school-results', ['id' => $exam->id, 'form_id' => $exam->form_id, 'slug' => $school->slug]) }}" class="dropdown-item">
                                 <i class="fas fa-file-excel fa-fw"></i> Merit List (Excel)
@@ -66,17 +66,22 @@
                             <td>{{ $result['subject2Marks'] }}</td>
                             <td>{{ $result['average'] }}</td>
                             <td>{{ $result['grade'] }}</td>
-                            <!-- Add other columns here if needed -->
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
 
-                <!-- Grade Analysis Table for Two Subjects -->
+                <!-- Grade Analysis Section -->
                 <h5 class="text-info text-decoration-underline">Grade Analysis</h5>
-                <button @click="isExpanded = !isExpanded" class="btn btn-primary btn-sm mb-2">
-                    <span x-text="isExpanded ? 'Minimize Grades' : 'Expand Grades'"></span>
-                </button>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <button @click="isExpanded = !isExpanded" class="btn btn-primary btn-sm">
+                        <span x-text="isExpanded ? 'Minimize Grades' : 'Expand Grades'"></span>
+                    </button>
+                    <a href="{{ route('pdf-download.grade-analysis', ['id' => $exam->id, 'form_id' => $exam->form_id, 'slug' => $school->slug]) }}" class="btn btn-success btn-sm">
+                        <i class="fas fa-file-pdf fa-fw"></i> Download Grade Analysis (PDF)
+                    </a>
+                </div>
+
                 <table id="two-subjects-analysis-table" class="table table-sm table-responsive align-items-center table-flush table-bordered table-striped">
                     <thead>
                         <tr>

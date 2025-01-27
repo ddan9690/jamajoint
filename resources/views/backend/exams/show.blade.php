@@ -19,7 +19,7 @@
             @endif
         </div>
         <div class="card-body">
-            <h6 class="m-0 font-weight-bold text-primary align-center">Schools Registered for the exam</h6>
+            <h6 class="m-0 font-weight-bold text-primary align-center">Schools Registered for the Exam</h6>
 
             <table class="table table-sm table-responsive table-bordered" id="registeredSchools">
                 <thead>

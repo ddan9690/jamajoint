@@ -16,12 +16,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('adm');
             $table->unsignedBigInteger('school_id');
+            $table->unsignedBigInteger('form_id')->nullable();
             $table->unsignedBigInteger('stream_id');
-            $table->string('gender');
-
-            $table->string('slug');
+            $table->string('gender')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
-
+            
+            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
             $table->foreign('stream_id')->references('id')->on('streams')->onDelete('cascade');
         });

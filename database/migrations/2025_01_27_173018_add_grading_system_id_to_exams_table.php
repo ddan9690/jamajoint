@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('counties', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->timestamps();
+        Schema::table('exams', function (Blueprint $table) {
+            $table->unsignedBigInteger('grading_system_id')->nullable()->after('year');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('counties');
+        Schema::table('exams', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -11,11 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('streams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('contribution'); // Define the 'contribution' column as an integer
+            $table->unsignedBigInteger('school_id');
+            $table->unsignedBigInteger('form_id')->nullable();
+            $table->string(column: 'slug')->nullable();
+
             $table->timestamps();
+            
+            $table->foreign('form_id')->references('id')->on('forms');
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
         });
     }
 
@@ -24,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('streams');
     }
 };

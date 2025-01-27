@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice_number');
-            $table->unsignedBigInteger('school_id');
-            $table->unsignedBigInteger('exam_id');
-            $table->unsignedBigInteger('user_id');
-            $table->decimal('amount', 10, 2);
+            $table->string('name');
+            $table->integer('contribution'); 
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('subjects');
     }
 };

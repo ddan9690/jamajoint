@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+             $table->unsignedBigInteger('form_id');
             $table->string('term');
             $table->year('year');
             $table->string('slug')->unique();
             $table->enum('published', ['yes', 'no'])->default('no');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
         });
     }
 
